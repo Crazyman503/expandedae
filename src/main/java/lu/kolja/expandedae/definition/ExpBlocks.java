@@ -174,11 +174,6 @@ public class ExpBlocks {
         );
     }
 
-    public static void init() {
-        // controls static load order
-        Expandedae.LOGGER.info("Initialised blocks.");
-    }
-
     public static List<BlockDefinition<?>> getBlocks() {
         return Collections.unmodifiableList(BLOCKS);
     }
@@ -194,5 +189,10 @@ public class ExpBlocks {
         var definition = new BlockDefinition<>(englishName, Expandedae.makeId(id), block, item);
         BLOCKS.add(definition);
         return definition;
+    }
+
+    public static void init() {
+        // controls static load order
+        Expandedae.LOGGER.info("Initialised blocks.");
     }
 }

@@ -10,11 +10,13 @@ import appeng.client.gui.widgets.UpgradesPanel;
 import appeng.core.localization.GuiText;
 import appeng.menu.SlotSemantics;
 import appeng.menu.implementations.PatternProviderMenu;
+import com.mojang.datafixers.util.Pair;
 import lu.kolja.expandedae.client.gui.widgets.ExpActionButton;
 import lu.kolja.expandedae.client.gui.widgets.ExpActionItems;
 import lu.kolja.expandedae.definition.ExpSettings;
 import lu.kolja.expandedae.enums.BlockingMode;
 import lu.kolja.expandedae.helper.base.IUpgradableMenu;
+import lu.kolja.expandedae.helper.misc.KeybindUtil;
 import lu.kolja.expandedae.helper.patternprovider.IPatternProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -48,11 +50,13 @@ public abstract class MixinPatternProviderScreen<C extends PatternProviderMenu> 
                 menu.getSlots(SlotSemantics.UPGRADE),
                 this::eae_$getCompatibleUpgrades));
         ExpActionButton modifyPatterns = new ExpActionButton(ExpActionItems.MODIFY_PATTERNS, act -> ((IPatternProvider) menu).expandedae$modifyPatterns(
-                ((AEBaseScreen<?>) Minecraft.getInstance().screen).isHandlingRightClick()
+                Pair.of(((AEBaseScreen<?>) Minecraft.getInstance().screen).isHandlingRightClick(),
+                        KeybindUtil.shiftMultiplier() * KeybindUtil.ctrlMultiplier()
+                )
         ));
         this.addToLeftToolbar(modifyPatterns);
-        if (((IUpgradableMenu) menu).getToolbox().isPresent()) {
-            this.widgets.add("toolbox", new ToolboxPanel(style, ((IUpgradableMenu) menu).getToolbox().getName()));
+        if (((IUpgradableMenu) menu).expandedae$getToolbox().isPresent()) {
+            this.widgets.add("toolbox", new ToolboxPanel(style, ((IUpgradableMenu) menu).expandedae$getToolbox().getName()));
         }
         this.eae$blockingMode = new ServerSettingToggleButton<>(
                 ExpSettings.BLOCKING_MODE,
@@ -65,7 +69,7 @@ public abstract class MixinPatternProviderScreen<C extends PatternProviderMenu> 
     private List<Component> eae_$getCompatibleUpgrades() {
         var list = new ArrayList<Component>();
         list.add(GuiText.CompatibleUpgrades.text());
-        list.addAll(Upgrades.getTooltipLinesForMachine(((IUpgradableMenu) menu).getUpgrades().getUpgradableItem()));
+        list.addAll(Upgrades.getTooltipLinesForMachine(((IUpgradableMenu) menu).expandedae$getUpgrades().getUpgradableItem()));
         return list;
     }
 

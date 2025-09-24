@@ -22,9 +22,13 @@ import org.slf4j.Logger;
 
 @Mod(Expandedae.MODID)
 public class Expandedae {
-
     public static final String MODID = "expandedae";
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    @Contract("_ -> new")
+    public static @NotNull ResourceLocation makeId(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
 
     //getActionableNode().getGrid().getStorageService().getInventory().insert() TODO IMPLEMENT TO STICKY CARD
 
@@ -63,10 +67,5 @@ public class Expandedae {
     private void commonSetup(final FMLCommonSetupEvent event) {
         new XMod();
         new ExpUpgrades(event);
-    }
-
-    @Contract("_ -> new")
-    public static @NotNull ResourceLocation makeId(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

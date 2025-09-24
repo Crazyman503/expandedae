@@ -32,11 +32,6 @@ import java.util.function.Function;
 @SuppressWarnings("ALL")
 public class ExpItems {
 
-    public static void init() {
-        // controls static load order
-        Expandedae.LOGGER.info("Initialised items.");
-    }
-
     private static final List<ItemDefinition<?>> ITEMS = new ArrayList<>();
     private static final List<ItemDefinition<?>> CELLS = new ArrayList<>();
     private static final List<ItemDefinition<?>> CPUS = new ArrayList<>();
@@ -125,8 +120,6 @@ public class ExpItems {
         return definition;
     }
 
-    public static void orderInit() {}
-
     /*
     public static final ItemDefinition<FilterTerminalPartItem> FILTER_TERMINAL_PART = Util.make(() -> {
         PartModels.registerModels(PartModelsHelper.createModels(FilterTerminalPart.class));
@@ -153,4 +146,9 @@ public class ExpItems {
             ItemStickyCard::new
     );
     */
+
+    public static void init() {
+        // controls static load order
+        Expandedae.LOGGER.info("Initialised items.");
+    }
 }

@@ -5,10 +5,12 @@ import appeng.client.gui.implementations.PatternProviderScreen;
 import appeng.client.gui.style.ScreenStyle;
 import appeng.client.gui.widgets.ServerSettingToggleButton;
 import appeng.menu.implementations.PatternProviderMenu;
+import com.mojang.datafixers.util.Pair;
 import lu.kolja.expandedae.client.gui.widgets.ExpActionButton;
 import lu.kolja.expandedae.client.gui.widgets.ExpActionItems;
 import lu.kolja.expandedae.definition.ExpSettings;
 import lu.kolja.expandedae.enums.BlockingMode;
+import lu.kolja.expandedae.helper.misc.KeybindUtil;
 import lu.kolja.expandedae.helper.patternprovider.IPatternProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -36,7 +38,9 @@ public abstract class MixinPatternProviderScreenAppFlux<C extends PatternProvide
     )
     private void init(PatternProviderMenu menu, Inventory playerInventory, Component title, ScreenStyle style, CallbackInfo ci) {
         ExpActionButton modifyPatterns = new ExpActionButton(ExpActionItems.MODIFY_PATTERNS, act -> ((IPatternProvider) menu).expandedae$modifyPatterns(
-                ((AEBaseScreen<?>) Minecraft.getInstance().screen).isHandlingRightClick()
+                Pair.of(((AEBaseScreen<?>) Minecraft.getInstance().screen).isHandlingRightClick(),
+                        KeybindUtil.shiftMultiplier() * KeybindUtil.ctrlMultiplier()
+                )
         ));
         this.addToLeftToolbar(modifyPatterns);
         this.eae$blockingMode = new ServerSettingToggleButton<>(
