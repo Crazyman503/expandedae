@@ -15,6 +15,7 @@
     "compat.advancedae.AAEAccessorExecutingCraftingJob$AAEAccessorTaskProgress",
     "compat.appflux.MixinPatternProviderLogicAppFlux",
     "compat.appflux.MixinPatternProviderMenuAppFlux",
+    "compat.gtceu.MixinMEPatternBufferPartMachine",
     "cpu.MixinCPUSelectionList",
     "cpu.MixinCraftingCPUCluster",
     "emi.MixinEmiScreenBase",
