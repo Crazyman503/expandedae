@@ -11,3 +11,5 @@ fix github workflow not building
 ae player transporter with terminal and shit
 
 probably work on ae2guide/port it back from 1.21.1
+
+add a button when wireless terminal has pattern refiller card that allows you to enable autocrafting of patterns, at a certain amount and ability to set batch size
