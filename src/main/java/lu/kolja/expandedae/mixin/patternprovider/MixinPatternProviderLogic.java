@@ -30,6 +30,7 @@ import lu.kolja.expandedae.mixin.accessor.AccessorCraftingCpuLogic;
 import lu.kolja.expandedae.mixin.accessor.AccessorExecutingCraftingJob;
 import lu.kolja.expandedae.mixin.compat.advancedae.AAEAccessorAdvCraftingCPULogic;
 import lu.kolja.expandedae.mixin.compat.advancedae.AAEAccessorExecutingCraftingJob;
+import lu.kolja.expandedae.xmod.advancedae.AdvancedAE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -308,13 +309,7 @@ public abstract class MixinPatternProviderLogic implements IUpgradeableObject, I
                 continue;
             }
             if (!AAE_LOADED) continue;
-            if (cpu instanceof AdvCraftingCPU advCpu) {
-                var task = ((AAEAccessorExecutingCraftingJob) ((AAEAccessorAdvCraftingCPULogic) advCpu.craftingLogic).getJob()).getTasks().get(details);
-                if (task != null && task.getValue() <= 1) {
-                    advCpu.cancelJob();
-                    return;
-                }
-            }
+            AdvancedAE.handleCpu(cpu, details);
         }
     }
 }

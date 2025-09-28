@@ -14,7 +14,6 @@ import lu.kolja.expandedae.helper.misc.PatternHelper;
 import lu.kolja.expandedae.helper.patternprovider.IPatternProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = PatternProviderMenu.class, remap = false)
-@Debug(export = true, print = true)
 public abstract class MixinPatternProviderMenuAppFlux extends AEBaseMenu implements IUpgradableMenu, IPatternProvider {
     @Shadow(remap = false) @Final protected PatternProviderLogic logic;
 
@@ -52,7 +50,7 @@ public abstract class MixinPatternProviderMenuAppFlux extends AEBaseMenu impleme
         }
     }
 
-    @Inject(method = "broadcastChanges", at = @At("HEAD"), remap = false)
+    @Inject(method = "broadcastChanges", at = @At("HEAD"), remap = true)
     public void broadcastChanges(CallbackInfo ci) {
         if (this.isServerSide()) eae$blockingMode = logic.getConfigManager().getSetting(ExpSettings.BLOCKING_MODE);
     }
