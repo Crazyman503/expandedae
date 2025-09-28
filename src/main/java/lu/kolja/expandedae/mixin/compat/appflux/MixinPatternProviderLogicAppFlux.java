@@ -25,14 +25,12 @@ import lu.kolja.expandedae.helper.patternprovider.PatternProviderTarget;
 import lu.kolja.expandedae.helper.patternprovider.PatternProviderTargetCache;
 import lu.kolja.expandedae.mixin.accessor.AccessorCraftingCpuLogic;
 import lu.kolja.expandedae.mixin.accessor.AccessorExecutingCraftingJob;
-import lu.kolja.expandedae.mixin.compat.advancedae.AAEAccessorAdvCraftingCPULogic;
-import lu.kolja.expandedae.mixin.compat.advancedae.AAEAccessorExecutingCraftingJob;
+import lu.kolja.expandedae.xmod.advancedae.AdvancedAE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -250,13 +248,7 @@ public abstract class MixinPatternProviderLogicAppFlux implements IUpgradeableOb
                 continue;
             }
             if (!AAE_LOADED) continue;
-            if (cpu instanceof AdvCraftingCPU advCpu) {
-                var task = ((AAEAccessorExecutingCraftingJob) ((AAEAccessorAdvCraftingCPULogic) advCpu.craftingLogic).getJob()).getTasks().get(details);
-                if (task != null && task.getValue() <= 1) {
-                    advCpu.cancelJob();
-                    return;
-                }
-            }
+            AdvancedAE.handleCpu(cpu, details);
         }
     }
 }
