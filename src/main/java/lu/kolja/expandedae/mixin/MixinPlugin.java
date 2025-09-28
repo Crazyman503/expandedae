@@ -25,17 +25,17 @@ public class MixinPlugin implements IMixinConfigPlugin {
                 "lu.kolja.expandedae.mixin.patternprovider.MixinPatternProviderLogicHost"
         },
         new List[]{
-                List.of("appflux"),
-                List.of("appflux"),
-                List.of("appflux"),
-                List.of("appflux")
+                List.of("appflux", "pccard"),
+                List.of("appflux", "pccard"),
+                List.of("appflux", "pccard"),
+                List.of("appflux", "pccard")
         }
     );
 
     /**
      * If mod b is loaded, do load class A
      */
-    public static final Object2ObjectMap<String, String> mixinMap2 = new Object2ObjectOpenHashMap<>(
+    public static final Object2ObjectMap<String, List<String>> mixinMap2 = new Object2ObjectOpenHashMap<>(
             new String[]{
                     "lu.kolja.expandedae.mixin.compat.appflux.MixinPatternProviderLogicAppFlux",
                     "lu.kolja.expandedae.mixin.compat.appflux.MixinPatternProviderMenuAppFlux",
@@ -46,11 +46,15 @@ public class MixinPlugin implements IMixinConfigPlugin {
                     "lu.kolja.expandedae.mixin.emi.MixinEmiScreenBase",
                     "lu.kolja.expandedae.mixin.compat.gtceu.MixinMEPatternBufferPartMachine"
             },
-            new String[]{
-                    "appflux", "appflux", "appflux",
-                    "advancedae", "advancedae", "advancedae",
-                    "emi",
-                    "gtceu"
+            new List[]{
+                    List.of("appflux", "pccard"),
+                    List.of("appflux", "pccard"),
+                    List.of("appflux", "pccard"),
+                    List.of("advancedae"),
+                    List.of("advancedae"),
+                    List.of("advancedae"),
+                    List.of("emi"),
+                    List.of("gtceu")
             }
     );
 
@@ -88,7 +92,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
             return mixinMap.get(mixinClassName).stream().noneMatch(this::isModLoaded);
         }
         if (mixinMap2.containsKey(mixinClassName)) {
-            return isModLoaded(mixinMap2.get(mixinClassName));
+            return mixinMap2.get(mixinClassName).stream().anyMatch(this::isModLoaded);
         }
         return true;
     }
