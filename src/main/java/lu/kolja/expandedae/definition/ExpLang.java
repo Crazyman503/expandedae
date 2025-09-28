@@ -23,6 +23,8 @@ public enum ExpLang implements LocalizationEnum {
     GUI_BLOCKING_MODE_SMART("gui.expandedae.blocking_mode.smart", "Allows same pattern to be pushed"),
     GUI_TOOLTIPS_MODIFY_PATTERNS("gui.tooltips.expandedae.modifyPatterns", "Modify Patterns"),
     GUI_TOOLTIPS_MODIFY_PATTERNS_HINT("gui.tooltips.expandedae.modifyPatternsHint", "Left click to multiply, right click to divide \nMultipliers: Shift 2x, Ctrl 8x"),
+    GUI_TOOLTIPS_MODIFY_PATTERNS_GT("gui.tooltips.expandedae.modifyPatternsGT", "Left click to multiply, right click to divide"),
+    GUI_TOOLTIPS_MODIFY_PATTERNS_HINT_GT("gui.tooltips.expandedae.modifyPatternsHintGT", "Multipliers: Shift 2x, Ctrl 8x"),
 
     GUI_BUTTONS_PATTERN_DIV("gui.buttons.pattern.div", "§c÷%d§f"),
     GUI_BUTTONS_PATTERN_MULT("gui.buttons.pattern.mult", "§bx%d§f"),

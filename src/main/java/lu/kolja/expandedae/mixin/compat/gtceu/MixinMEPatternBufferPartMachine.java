@@ -56,8 +56,9 @@ public abstract class MixinMEPatternBufferPartMachine extends MEBusPartMachine i
                                     }
                                 })
                 .setTooltips(List.of(
-                        ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS_HINT.text())
-                )
+                        ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS_GT.text(),
+                        ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS_HINT_GT.text()
+                ))
         );
     }
 }
