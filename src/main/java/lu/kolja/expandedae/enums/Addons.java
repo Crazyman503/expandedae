@@ -11,16 +11,19 @@ public enum Addons {
     ADV("advancedae"),
     APPMEK("appmek"),
     ARSENG("arseng"),
-    APPBOT("appbot");
+    APPBOT("appbot"),
+    GTCEU("gtceu");
 
     public final String mod;
+    public final boolean isLoaded;
 
     Addons(String mod) {
         this.mod = mod;
+        this.isLoaded = isLoaded(mod);
     }
 
-    public boolean isLoaded() {
-        return ModList.get().isLoaded(mod);
+    private boolean isLoaded(String modId) {
+        return ModList.get().isLoaded(modId);
     }
 
     public Component getUnavailableTooltip() {

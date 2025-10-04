@@ -11,6 +11,8 @@ import appeng.me.storage.CompositeStorage;
 import appeng.parts.automation.StackWorldBehaviors;
 import appeng.util.BlockApiCache;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
+import lu.kolja.expandedae.enums.Addons;
+import lu.kolja.expandedae.xmod.gtceu.ExpGtceu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -81,8 +83,12 @@ public class PatternProviderTargetCache {
                 return true;
             }
 
-            public MEStorage getStorage() {
-                return storage;
+            @Override
+            public boolean isEmpty() {
+                for (var stack : storage.getAvailableStacks()) {
+                    if (Addons.GTCEU.isLoaded && stack.getKey() != ExpGtceu.programmedCircuit.get()) return false;
+                }
+                return true;
             }
         };
     }

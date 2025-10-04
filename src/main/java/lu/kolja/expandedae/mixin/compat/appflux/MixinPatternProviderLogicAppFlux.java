@@ -45,7 +45,7 @@ import java.util.Set;
 @Mixin(value = PatternProviderLogic.class, remap = false)
 public abstract class MixinPatternProviderLogicAppFlux implements IUpgradeableObject, IPatternProviderLogic {
     @Unique
-    private static final boolean AAE_LOADED = Addons.ADV.isLoaded();
+    private static final boolean AAE_LOADED = Addons.ADV.isLoaded;
 
     @Unique
     private PatternProviderTargetCache[] expandedae$targetCaches;
@@ -151,7 +151,7 @@ public abstract class MixinPatternProviderLogicAppFlux implements IUpgradeableOb
                         switch (expandedae$getBlockingMode()) {
                             case ALL -> {
 
-                                if ((!this.isBlocking() || adapter.getStorage().getAvailableStacks().isEmpty()) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
+                                if ((!this.isBlocking() || adapter.isEmpty()) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
                                     patternDetails.pushInputsToExternalInventory(inputHolder, (what, amount) -> {
                                         long inserted = adapter.insert(what, amount, Actionable.MODULATE);
                                         if (inserted < amount) {
@@ -166,7 +166,7 @@ public abstract class MixinPatternProviderLogicAppFlux implements IUpgradeableOb
                                 }
                             }
                             case SMART -> {
-                                if ((!this.isBlocking() || adapter.getStorage().getAvailableStacks().isEmpty() || adapter.onlyHasPatternInput(this.patternInputs)) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
+                                if ((!this.isBlocking() || adapter.isEmpty() || adapter.onlyHasPatternInput(this.patternInputs)) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
                                     patternDetails.pushInputsToExternalInventory(inputHolder, (what, amount) -> {
                                         long inserted = adapter.insert(what, amount, Actionable.MODULATE);
                                         if (inserted < amount) {

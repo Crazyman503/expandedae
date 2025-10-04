@@ -6,7 +6,6 @@ import appeng.api.crafting.IPatternDetails;
 import appeng.api.implementations.blockentities.ICraftingMachine;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IManagedGridNode;
-import appeng.api.networking.crafting.ICraftingCPU;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.GenericStack;
@@ -28,8 +27,6 @@ import lu.kolja.expandedae.helper.patternprovider.PatternProviderTarget;
 import lu.kolja.expandedae.helper.patternprovider.PatternProviderTargetCache;
 import lu.kolja.expandedae.mixin.accessor.AccessorCraftingCpuLogic;
 import lu.kolja.expandedae.mixin.accessor.AccessorExecutingCraftingJob;
-import lu.kolja.expandedae.mixin.compat.advancedae.AAEAccessorAdvCraftingCPULogic;
-import lu.kolja.expandedae.mixin.compat.advancedae.AAEAccessorExecutingCraftingJob;
 import lu.kolja.expandedae.xmod.advancedae.AdvancedAE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,7 +35,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -53,7 +49,7 @@ import java.util.Set;
 @Mixin(value = PatternProviderLogic.class, remap = false, priority = 1001)
 public abstract class MixinPatternProviderLogic implements IUpgradeableObject, IPatternProviderLogic {
     @Unique
-    private static final boolean AAE_LOADED = Addons.ADV.isLoaded();
+    private static final boolean AAE_LOADED = Addons.ADV.isLoaded;
 
     @Unique
     private PatternProviderTargetCache[] expandedae$targetCaches;
@@ -212,7 +208,7 @@ public abstract class MixinPatternProviderLogic implements IUpgradeableObject, I
                         PatternProviderTarget adapter = target.target();
                         switch (expandedae$getBlockingMode()) {
                             case ALL -> {
-                                if ((!this.isBlocking() || adapter.getStorage().getAvailableStacks().isEmpty()) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
+                                if ((!this.isBlocking() || adapter.isEmpty()) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
                                     patternDetails.pushInputsToExternalInventory(inputHolder, (what, amount) -> {
                                         long inserted = adapter.insert(what, amount, Actionable.MODULATE);
                                         if (inserted < amount) {
@@ -227,7 +223,7 @@ public abstract class MixinPatternProviderLogic implements IUpgradeableObject, I
                                 }
                             }
                             case SMART -> {
-                                if ((!this.isBlocking() || adapter.getStorage().getAvailableStacks().isEmpty() || adapter.onlyHasPatternInput(this.patternInputs)) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
+                                if ((!this.isBlocking() || adapter.isEmpty() || adapter.onlyHasPatternInput(this.patternInputs)) && this.expandedae$adapterAcceptsAll(adapter, inputHolder)) {
                                     patternDetails.pushInputsToExternalInventory(inputHolder, (what, amount) -> {
                                         long inserted = adapter.insert(what, amount, Actionable.MODULATE);
                                         if (inserted < amount) {

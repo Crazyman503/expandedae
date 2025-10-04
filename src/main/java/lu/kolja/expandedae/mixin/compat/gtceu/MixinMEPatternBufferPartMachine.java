@@ -17,7 +17,7 @@ import com.mojang.datafixers.util.Pair;
 import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.helper.misc.KeybindUtil;
 import lu.kolja.expandedae.helper.misc.PatternHelper;
-import lu.kolja.expandedae.xmod.gtceu.ExpGuiTextures;
+import lu.kolja.expandedae.xmod.gtceu.ExpGtceu;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -42,7 +42,7 @@ public abstract class MixinMEPatternBufferPartMachine extends MEBusPartMachine i
     )
     private void attachConfigurators(CallbackInfo ci, @Local(argsOnly = true) ConfiguratorPanel configuratorPanel) {
         configuratorPanel.attachConfigurators(new ButtonConfigurator(
-                new GuiTextureGroup(GuiTextures.BUTTON, ExpGuiTextures.MULTIPLY_OVERLAY),
+                new GuiTextureGroup(GuiTextures.BUTTON, ExpGtceu.MULTIPLY_OVERLAY),
                                 c -> {
                                     for (int i = 0; i < this.internalPatternInventory.size(); i++) {
                                         var currentStack = this.internalPatternInventory.getStackInSlot(i);
