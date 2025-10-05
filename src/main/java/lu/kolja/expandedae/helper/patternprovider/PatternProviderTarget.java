@@ -11,10 +11,9 @@ import appeng.me.storage.CompositeStorage;
 import appeng.parts.automation.StackWorldBehaviors;
 import com.google.common.util.concurrent.Runnables;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
-import lu.kolja.expandedae.enums.Addons;
-import lu.kolja.expandedae.xmod.gtceu.ExpGtceu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 public interface PatternProviderTarget {
+    ResourceLocation programmedCircuit = ResourceLocation.fromNamespaceAndPath("gtceu", "programmed_circuit");
     @Nullable
     static PatternProviderTarget get(Level l, BlockPos pos, @Nullable BlockEntity be, Direction side, IActionSource src) {
         if (be == null) {
@@ -71,7 +71,8 @@ public interface PatternProviderTarget {
             @Override
             public boolean onlyHasPatternInput(Set<AEKey> patternInputs) {
                 for (var stack : storage.getAvailableStacks()) {
-                    if (patternInputs.contains(stack.getKey().dropSecondary())) continue;
+                    var key = stack.getKey();
+                    if (patternInputs.contains(key) || key.getId().equals(programmedCircuit)) continue;
                     return false;
                 }
                 return true;
@@ -79,7 +80,7 @@ public interface PatternProviderTarget {
 
             public boolean isEmpty() {
                 for (var stack : storage.getAvailableStacks()) {
-                    if (Addons.GTCEU.isLoaded && stack.getKey() != ExpGtceu.programmedCircuit.get()) return false;
+                    if (stack.getKey().getId() != programmedCircuit) return false;
                 }
                 return true;
             }

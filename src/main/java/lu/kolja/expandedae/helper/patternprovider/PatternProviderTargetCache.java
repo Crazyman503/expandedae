@@ -11,8 +11,6 @@ import appeng.me.storage.CompositeStorage;
 import appeng.parts.automation.StackWorldBehaviors;
 import appeng.util.BlockApiCache;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
-import lu.kolja.expandedae.enums.Addons;
-import lu.kolja.expandedae.xmod.gtceu.ExpGtceu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -77,7 +75,8 @@ public class PatternProviderTargetCache {
             @Override
             public boolean onlyHasPatternInput(Set<AEKey> patternInputs) {
                 for (var stack : storage.getAvailableStacks()) {
-                    if (patternInputs.contains(stack.getKey().dropSecondary())) continue;
+                    var key = stack.getKey();
+                    if (patternInputs.contains(key) || key.getId().equals(programmedCircuit)) continue;
                     return false;
                 }
                 return true;
@@ -86,7 +85,7 @@ public class PatternProviderTargetCache {
             @Override
             public boolean isEmpty() {
                 for (var stack : storage.getAvailableStacks()) {
-                    if (Addons.GTCEU.isLoaded && stack.getKey() != ExpGtceu.programmedCircuit.get()) return false;
+                    if (stack.getKey().getId() != programmedCircuit) return false;
                 }
                 return true;
             }
