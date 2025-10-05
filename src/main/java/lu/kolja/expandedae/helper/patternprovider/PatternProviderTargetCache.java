@@ -85,7 +85,7 @@ public class PatternProviderTargetCache {
             @Override
             public boolean isEmpty() {
                 for (var stack : storage.getAvailableStacks()) {
-                    if (stack.getKey().getId() != programmedCircuit) return false;
+                    if (!stack.getKey().getId().equals(programmedCircuit)) return false;
                 }
                 return true;
             }
