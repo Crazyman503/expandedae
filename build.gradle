@@ -134,55 +134,42 @@ repositories {
 }
 
 dependencies {
+    // literally AE2
     modImplementation "curse.maven:applied-energistics-2-223794:6605410"
     modImplementation "curse.maven:guideme-1173950:6489464"
 
+    // AE Addons
+    modImplementation "curse.maven:applied-energistics-2-wireless-terminals-459929:5217955"
+    modImplementation "curse.maven:mega-cells-622112:6175008"
     modImplementation "curse.maven:ex-pattern-provider-892005:6518515"
     modImplementation "curse.maven:applied-flux-965012:6755986"
+    modImplementation "curse.maven:advancedae-1084104:6205290"
+    // And their dependencies
     modImplementation "curse.maven:glodium-957920:5226922"
-
-    //runtimeOnly fg.deobf("curse.maven:modern-ae2-additions-1028068:6342203")
-
-    modImplementation "curse.maven:applied-energistics-2-wireless-terminals-459929:5217955"
     modRuntimeOnly "curse.maven:architectury-api-419699:5137938"
     modRuntimeOnly "curse.maven:curios-309927:6418456"
-
     modRuntimeOnly "curse.maven:geckolib-388172:6027567"
-    modImplementation "curse.maven:mega-cells-622112:6175008"
     modRuntimeOnly "curse.maven:cloth-config-348521:5729105"
 
-    modImplementation "curse.maven:advancedae-1084104:6205290"
+    modImplementation("com.gregtechceu.gtceu:gtceu-1.20.1:$gtceu_version") { transitive = false }
+    modImplementation("com.lowdragmc.ldlib:ldlib-forge-1.20.1:$ldlib_version") { transitive = false }
 
     modRuntimeOnly "curse.maven:jade-324717:6271651"
     modRuntimeOnly "curse.maven:observable-509575:5643037"
     modRuntimeOnly "curse.maven:architectury-api-419699:5137938"
     modRuntimeOnly "curse.maven:kotlin-for-forge-351264:5402061"
-    modRuntimeOnly "curse.maven:infinite-storage-cell-1173691:6155997"
 
+    modRuntimeOnly "curse.maven:mekanism-268560:6552911"
+    modRuntimeOnly "curse.maven:patchouli-306770:6164575"
+    modImplementation "dev.emi:emi-forge:${emi_version}"
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+    compileOnly "org.jetbrains:annotations:26.0.2-1"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1"))
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.6-beta.1"))
     implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.3.6-beta.1"))
-
-    //ADDONS
-    modImplementation "curse.maven:applied-mekanistics-574300:4842281"
-    modRuntimeOnly "curse.maven:mekanism-268560:6552911"
-
-    //runtimeOnly fg.deobf("curse.maven:applied-botanics-addon-610632:4904185")
-    //runtimeOnly fg.deobf("curse.maven:botania-225643:6366547")
-    modRuntimeOnly "curse.maven:patchouli-306770:6164575"
-
-    modImplementation "curse.maven:ars-energistique-905641:5504444"
-    modRuntimeOnly "curse.maven:ars-nouveau-401955:5894609"
-
-    modImplementation "dev.emi:emi-forge:${emi_version}"
-    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-
-    modImplementation("com.gregtechceu.gtceu:gtceu-1.20.1:$gtceu_version") { transitive = false }
-    modImplementation("com.lowdragmc.ldlib:ldlib-forge-1.20.1:$ldlib_version") { transitive = false }
-
-    compileOnly "org.jetbrains:annotations:26.0.2-1"
 }
 
 
