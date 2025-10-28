@@ -67,7 +67,7 @@ public abstract class MixinPatternProviderLogic implements IUpgradeableObject, I
     @Shadow
     private IManagedGridNode mainNode;
 
-    @Shadow(remap = false)
+    @Shadow
     @Final
     private ConfigManager configManager;
 
