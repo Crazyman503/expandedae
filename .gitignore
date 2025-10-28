@@ -13,3 +13,4 @@ jar
 /scripting/
 /.env
 .gitignore
+sources
