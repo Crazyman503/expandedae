@@ -92,9 +92,8 @@ public class PatternProviderTargetCache {
                     }
                     case SMART -> {
                         for (var stack : storage.getAvailableStacks()) {
-                            if (patternInputs.contains(stack.getKey().dropSecondary())
-                                    || stack.getKey().getId().equals(programmedCircuit)) continue;
-                            return true;
+                            if (stack.getKey().getId().equals(programmedCircuit)) continue;
+                            if (!patternInputs.contains(stack.getKey().dropSecondary())) return true;
                         }
                     }
                 }

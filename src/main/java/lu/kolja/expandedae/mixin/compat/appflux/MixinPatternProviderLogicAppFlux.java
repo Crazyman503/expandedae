@@ -4,6 +4,7 @@ import appeng.api.crafting.IPatternDetails;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IManagedGridNode;
 import appeng.api.networking.security.IActionSource;
+import appeng.api.stacks.AEKey;
 import appeng.api.stacks.KeyCounter;
 import appeng.api.upgrades.IUpgradeableObject;
 import appeng.helpers.patternprovider.PatternProviderLogic;
@@ -11,6 +12,7 @@ import appeng.helpers.patternprovider.PatternProviderLogicHost;
 import appeng.helpers.patternprovider.PatternProviderTarget;
 import appeng.me.cluster.implementations.CraftingCPUCluster;
 import appeng.util.ConfigManager;
+import com.llamalad7.mixinextras.sugar.Local;
 import lu.kolja.expandedae.definition.ExpItems;
 import lu.kolja.expandedae.definition.ExpSettings;
 import lu.kolja.expandedae.enums.Addons;
@@ -27,8 +29,12 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Mixin(value = PatternProviderLogic.class, remap = false)
 public abstract class MixinPatternProviderLogicAppFlux implements IUpgradeableObject, IPatternProviderLogic {
@@ -115,5 +121,23 @@ public abstract class MixinPatternProviderLogicAppFlux implements IUpgradeableOb
             if (!AAE_LOADED) continue;
             AdvancedAE.handleCpu(cpu, details);
         }
+    }
+
+    @ModifyArg(
+            method = "pushPattern",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lappeng/helpers/patternprovider/PatternProviderTarget;containsPatternInput(Ljava/util/Set;)Z"
+            )
+    )
+    private Set<AEKey> modifiedContainsPatternInput(Set<AEKey> patternInputs, @Local(argsOnly = true) IPatternDetails patternDetails) {
+        if (expandedae$getBlockingMode() != BlockingMode.SMART) return patternInputs;
+        // This is more efficient than streams, even tho it's a minimal difference,
+        // since this is a high-frequency call I'd rather do it like this
+        var result = new HashSet<AEKey>();
+        for (var input : patternDetails.getInputs()) {
+            result.add(input.getPossibleInputs()[0].what());
+        }
+        return result;
     }
 }
