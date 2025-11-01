@@ -44,7 +44,10 @@ public enum ExpLang implements LocalizationEnum {
     GROUP_TAG_STORAGE_BUS_NAME("group.tag_storage_bus.name", "ME Tagged Storage Bus"),
     GROUP_MOD_STORAGE_BUS_NAME("group.mod_storage_bus.name", "ME Mod Storage Bus"),
     GROUP_PRECISE_STORAGE_BUS_NAME("group.precise_storage_bus.name", "ME Precise Storage Bus"),
-    GROUP_PATTERN_ENCODING_TERMINAL_NAME("group.pattern_encoding_terminal.name", "ME Pattern Encoding Terminal");
+    GROUP_PATTERN_ENCODING_TERMINAL_NAME("group.pattern_encoding_terminal.name", "ME Pattern Encoding Terminal"),
+
+    CANCEL_ALL("gui.expandedae.cancel_all", "Cancel All"),
+    CANCEL_ALL_HINT("gui.expandedae.cancel_all.hint", "Cancel all running Crafts");
 
     private final String key;
     private final String text;

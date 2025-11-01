@@ -84,6 +84,9 @@ sourceSets {
     }
 }
 
+def extraModsDir = "extra-mods"
+file(extraModsDir).mkdir()
+
 repositories {
     mavenLocal()
     maven {
@@ -129,6 +132,10 @@ repositories {
     maven {
         url = "https://maven.bawnorton.com/releases"
     }
+    flatDir {
+        name "extra-mods"
+        dir file(extraModsDir)
+    }
 }
 
 dependencies {
@@ -161,6 +168,17 @@ dependencies {
     modRuntimeOnly "curse.maven:patchouli-306770:6164575"
     modImplementation "dev.emi:emi-forge:${emi_version}"
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+
+
+    for (extraModJar in fileTree(dir: "extra-mods", include: '*.jar')) {
+        def basename = extraModJar.name.substring(0, extraModJar.name.length() - ".jar".length())
+        def versionSep = basename.lastIndexOf('-')
+        assert versionSep != -1
+        def artifactId = basename.substring(0, versionSep)
+        def version = basename.substring(versionSep + 1)
+        modRuntimeOnly "extra-mods:$artifactId:$version"
+    }
 
     compileOnly "org.jetbrains:annotations:26.0.2-1"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

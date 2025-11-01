@@ -44,6 +44,8 @@
   "gui.expandedae.blocking_mode.all": "Blocks if target contains anything",
   "gui.expandedae.blocking_mode.default": "Default blocking mode",
   "gui.expandedae.blocking_mode.smart": "Allows same pattern to be pushed",
+  "gui.expandedae.cancel_all": "Cancel All",
+  "gui.expandedae.cancel_all.hint": "Cancel all running Crafts",
   "gui.expandedae.exp_io_port": "Expanded IO Port",
   "gui.expandedae.exp_pattern_provider": "Expanded Pattern Provider",
   "gui.expandedae.filter_terminal": "Filter Terminal",

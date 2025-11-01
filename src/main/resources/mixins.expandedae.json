@@ -18,6 +18,7 @@
     "compat.gtceu.MixinMEPatternBufferPartMachine",
     "cpu.MixinCPUSelectionList",
     "cpu.MixinCraftingCPUCluster",
+    "cpu.MixinCraftingStatusMenu",
     "emi.MixinEmiScreenBase",
     "misc.MixinControllerValidator",
     "misc.MixinMathExpressionParser",
@@ -33,6 +34,7 @@
     "accessor.AccessorBuiltInModelHooks",
     "compat.appflux.MixinPatternProviderScreenAppFlux",
     "cpu.MixinCraftConfirmScreen",
+    "cpu.MixinCraftingStatusScreen",
     "cpu.MixinModelBakery",
     "misc.MixinSettingToggleButton",
     "patternprovider.MixinPatternProviderScreen"
