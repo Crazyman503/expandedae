@@ -1,20 +1,31 @@
 package lu.kolja.expandedae.datagen;
 
+import appeng.api.ids.AETags;
 import appeng.api.util.AEColor;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEParts;
+import appeng.datagen.providers.tags.ConventionTags;
+import appeng.recipes.transform.TransformCircumstance;
+import appeng.recipes.transform.TransformRecipeBuilder;
 import com.glodblock.github.extendedae.common.EPPItemAndBlock;
 import gripe._90.megacells.definition.MEGABlocks;
 import gripe._90.megacells.definition.MEGAItems;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.datagen.conditionals.ModNotLoadedCondition;
 import lu.kolja.expandedae.enums.ExpTiers;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -24,6 +35,7 @@ import static appeng.core.definitions.AEParts.PATTERN_PROVIDER;
 import static lu.kolja.expandedae.definition.ExpBlocks.*;
 import static lu.kolja.expandedae.definition.ExpItems.*;
 import static lu.kolja.expandedae.enums.Addons.EXT;
+import static lu.kolja.expandedae.enums.Addons.GTCEU;
 import static lu.kolja.expandedae.enums.Addons.MEGA;
 import static lu.kolja.expandedae.enums.ExpTiers.*;
 import static net.minecraft.data.recipes.RecipeCategory.MISC;
@@ -145,6 +157,30 @@ public class ExpRecipeProvider extends RecipeProvider {
                 .requires(ENGINEERING_PROCESSOR)
                 .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
                 .save(out, craftingId("exp_crafting_accelerator_2"));
+        ConditionalRecipe.builder()
+                .addCondition(notLoaded(MEGA.mod))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(MISC, EXP_ENERGY_CELL)
+                                .pattern("DDD")
+                                .pattern("DED")
+                                .pattern("DDD")
+                                .define('D', AEBlocks.DENSE_ENERGY_CELL)
+                                .define('E', ENGINEERING_PROCESSOR)
+                                .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
+                                ::save
+                ).build(out, craftingId("exp_energy_cell_ae"));
+        ConditionalRecipe.builder()
+                .addCondition(loaded(MEGA.mod))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(MISC, EXP_ENERGY_CELL)
+                                .pattern("DDD")
+                                .pattern("DED")
+                                .pattern("DDD")
+                                .define('D', MEGABlocks.MEGA_ENERGY_CELL)
+                                .define('E', ENGINEERING_PROCESSOR)
+                                .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
+                                ::save
+                ).build(out, craftingId("exp_energy_cell_mega"));
 
         upgrade(out, TIER_2, TIER_4);
         upgrade(out, TIER_4, TIER_8);
@@ -193,5 +229,9 @@ public class ExpRecipeProvider extends RecipeProvider {
 
     private ResourceLocation craftingId(String name) {
         return Expandedae.makeId("crafting/" + name);
+    }
+
+    private ResourceLocation transformId(String name) {
+        return Expandedae.makeId("transform/" + name);
     }
 }

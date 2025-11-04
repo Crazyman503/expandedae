@@ -20,6 +20,7 @@
   "block.expandedae.exp_crafting_accelerator_8": "8x Crafting Co-Processing Unit",
   "block.expandedae.exp_crafting_accelerator_8k": "8K Crafting Co-Processing Unit",
   "block.expandedae.exp_crafting_unit": "Expanded Crafting Unit",
+  "block.expandedae.exp_energy_cell": "Expanded Energy Cell",
   "block.expandedae.exp_io_port": "Expanded IO Port",
   "block.expandedae.exp_pattern_provider": "Expanded Pattern Provider",
   "creativetab.expandedae": "Expanded AE",

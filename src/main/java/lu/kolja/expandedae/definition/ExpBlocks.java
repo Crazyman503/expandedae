@@ -2,6 +2,8 @@ package lu.kolja.expandedae.definition;
 
 import appeng.block.AEBaseBlockItem;
 import appeng.block.crafting.CraftingUnitBlock;
+import appeng.block.networking.EnergyCellBlock;
+import appeng.block.networking.EnergyCellBlockItem;
 import appeng.core.definitions.BlockDefinition;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.block.block.ExpIOPortBlock;
@@ -36,6 +38,12 @@ public class ExpBlocks {
             "exp_io_port",
             ExpIOPortBlock::new,
             ExpIOPortBlockItem::new
+    );
+    public static final BlockDefinition<EnergyCellBlock> EXP_ENERGY_CELL = block(
+            "Expanded Energy Cell",
+            "exp_energy_cell",
+            () -> new EnergyCellBlock(Long.MAX_VALUE / 1000d, Integer.MAX_VALUE, Integer.MAX_VALUE - 1), // Creative energy cells have priority Integer.MAX_VALUE
+            EnergyCellBlockItem::new
     );
 
     public static final BlockDefinition<CraftingUnitBlock> EXP_CRAFTING_UNIT = block(

@@ -3,6 +3,7 @@ package lu.kolja.expandedae.definition;
 import appeng.block.AEBaseEntityBlock;
 import appeng.blockentity.AEBaseBlockEntity;
 import appeng.blockentity.crafting.CraftingBlockEntity;
+import appeng.blockentity.networking.EnergyCellBlockEntity;
 import appeng.core.definitions.BlockDefinition;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.block.entity.ExpIOPortBlockEntity;
@@ -32,6 +33,14 @@ public class ExpBlockEntities {
             ExpIOPortBlockEntity::new,
             ExpBlocks.EXP_IO_PORT
     );
+
+    public static final BlockEntityType<EnergyCellBlockEntity> EXP_ENERGY_CELL = create(
+            "exp_energy_cell",
+            EnergyCellBlockEntity.class,
+            EnergyCellBlockEntity::new,
+            ExpBlocks.EXP_ENERGY_CELL
+    );
+
     public static final BlockEntityType<CraftingBlockEntity> EXP_CPUS = create(
             "exp_cpus",
             CraftingBlockEntity.class,
