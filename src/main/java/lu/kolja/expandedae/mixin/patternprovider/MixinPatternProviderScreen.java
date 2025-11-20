@@ -49,10 +49,10 @@ public abstract class MixinPatternProviderScreen<C extends PatternProviderMenu> 
         this.widgets.add("upgrades", new UpgradesPanel(
                 menu.getSlots(SlotSemantics.UPGRADE),
                 this::eae_$getCompatibleUpgrades));
-        ExpActionButton modifyPatterns = new ExpActionButton(ExpActionItems.MODIFY_PATTERNS, act -> ((IPatternProvider) menu).expandedae$modifyPatterns(
-                Pair.of(((AEBaseScreen<?>) Minecraft.getInstance().screen).isHandlingRightClick(),
-                        KeybindUtil.shiftMultiplier() * KeybindUtil.ctrlMultiplier()
-                )
+
+        ExpActionButton modifyPatterns = new ExpActionButton(ExpActionItems.MODIFY_PATTERNS,
+                act -> ((IPatternProvider) menu).expandedae$modifyPatterns(
+                KeybindUtil.shiftMultiplier() * KeybindUtil.ctrlMultiplier() * (this.isHandlingRightClick() ? -1 : 1)
         ));
         this.addToLeftToolbar(modifyPatterns);
         if (((IUpgradableMenu) menu).expandedae$getToolbox().isPresent()) {

@@ -37,10 +37,9 @@ public abstract class MixinPatternProviderScreenAppFlux<C extends PatternProvide
             remap = false
     )
     private void init(PatternProviderMenu menu, Inventory playerInventory, Component title, ScreenStyle style, CallbackInfo ci) {
-        ExpActionButton modifyPatterns = new ExpActionButton(ExpActionItems.MODIFY_PATTERNS, act -> ((IPatternProvider) menu).expandedae$modifyPatterns(
-                Pair.of(((AEBaseScreen<?>) Minecraft.getInstance().screen).isHandlingRightClick(),
-                        KeybindUtil.shiftMultiplier() * KeybindUtil.ctrlMultiplier()
-                )
+        ExpActionButton modifyPatterns = new ExpActionButton(ExpActionItems.MODIFY_PATTERNS,
+                act -> ((IPatternProvider) menu).expandedae$modifyPatterns(
+                KeybindUtil.shiftMultiplier() * KeybindUtil.ctrlMultiplier() * (this.isHandlingRightClick() ? -1 : 1)
         ));
         this.addToLeftToolbar(modifyPatterns);
         this.eae$blockingMode = new ServerSettingToggleButton<>(

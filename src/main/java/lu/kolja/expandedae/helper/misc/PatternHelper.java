@@ -13,16 +13,18 @@ public class PatternHelper {
 
     public static final int BASE_FACTOR = 2;
 
-    public static ItemStack modifyPatterns(ItemStack stack, Pair<Boolean, Integer> info, Level level) {
+    public static ItemStack modifyPatterns(ItemStack stack, int mult, Level level) {
         var detail = PatternDetailsHelper.decodePattern(stack, level);
+        boolean division = mult < 0;
+        mult = Math.abs(mult);
         if (detail instanceof AEProcessingPattern processingPattern) {
             var input = Arrays.stream(processingPattern.getSparseInputs()).toArray(GenericStack[]::new);
             var output = Arrays.stream(processingPattern.getOutputs()).toArray(GenericStack[]::new);
-            if (checkModify(input, getScale(info.getSecond()), info.getFirst()) && checkModify(output, getScale(info.getSecond()), info.getFirst())) {
+            if (checkModify(input, getScale(mult), division) && checkModify(output, getScale(mult), division)) {
                 var mulInput = new GenericStack[input.length];
                 var mulOutput = new GenericStack[output.length];
-                modifyStacks(input, mulInput, getScale(info.getSecond()), info.getFirst());
-                modifyStacks(output, mulOutput, getScale(info.getSecond()), info.getFirst());
+                modifyStacks(input, mulInput, getScale(mult), division);
+                modifyStacks(output, mulOutput, getScale(mult), division);
                 return PatternDetailsHelper.encodeProcessingPattern(
                         mulInput,
                         mulOutput
@@ -38,23 +40,13 @@ public class PatternHelper {
     }
 
     public static boolean checkModify(GenericStack[] stacks, int scale, boolean division) {
-        if (division) {
-            for (var stack : stacks) {
-                if (stack != null) {
-                    if (stack.amount() % scale != 0) {
-                        return false;
-                    }
-                }
-            }
-        } else {
-            for (var stack : stacks) {
-                if (stack != null) {
-                    long upper = 999999L * stack.what().getAmountPerUnit();
-                    if (stack.amount() * scale > upper) {
-                        return false;
-                    }
-                }
-            }
+        for (var stack : stacks) {
+            if (stack == null) continue;
+            boolean invalid = division
+                    ? stack.amount() % scale != 0
+                    : stack.amount() * scale > 999999L * stack.what().getAmountPerUnit();
+
+            if (invalid) return false;
         }
         return true;
     }

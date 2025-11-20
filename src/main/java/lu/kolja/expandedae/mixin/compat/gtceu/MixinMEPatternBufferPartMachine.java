@@ -43,18 +43,19 @@ public abstract class MixinMEPatternBufferPartMachine extends MEBusPartMachine i
     private void attachConfigurators(CallbackInfo ci, @Local(argsOnly = true) ConfiguratorPanel configuratorPanel) {
         configuratorPanel.attachConfigurators(new ButtonConfigurator(
                 new GuiTextureGroup(GuiTextures.BUTTON, ExpGtceu.MULTIPLY_OVERLAY),
-                                c -> {
-                                    for (int i = 0; i < this.internalPatternInventory.size(); i++) {
-                                        var currentStack = this.internalPatternInventory.getStackInSlot(i);
-                                        if (currentStack.isEmpty()) continue;
-                                        var newStack = PatternHelper.modifyPatterns(
-                                                currentStack,
-                                                Pair.of(c.button == 1,
-                                                        (c.isShiftClick ? KeybindUtil.SHIFT_MULTIPLIER : 1) * (c.isCtrlClick ? KeybindUtil.CTRL_MULTIPLIER : 1)),
-                                                this.getLevel());
-                                        this.internalPatternInventory.setItemDirect(i, newStack);
-                                    }
-                                })
+                c -> {
+                    for (int i = 0; i < this.internalPatternInventory.size(); i++) {
+                        var currentStack = this.internalPatternInventory.getStackInSlot(i);
+                        if (currentStack.isEmpty()) continue;
+                        var newStack = PatternHelper.modifyPatterns(
+                                currentStack,
+                                (c.isShiftClick ? KeybindUtil.SHIFT_MULTIPLIER : 1)
+                                        * (c.isCtrlClick ? KeybindUtil.CTRL_MULTIPLIER : 1)
+                                        * (c.button == 1 ? -1 : 1),
+                                this.getLevel());
+                        this.internalPatternInventory.setItemDirect(i, newStack);
+                    }
+                })
                 .setTooltips(List.of(
                         ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS_GT.text(),
                         ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS_HINT_GT.text()

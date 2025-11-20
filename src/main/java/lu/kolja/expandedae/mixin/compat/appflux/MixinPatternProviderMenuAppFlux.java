@@ -6,7 +6,6 @@ import appeng.menu.AEBaseMenu;
 import appeng.menu.SlotSemantics;
 import appeng.menu.guisync.GuiSync;
 import appeng.menu.implementations.PatternProviderMenu;
-import com.mojang.datafixers.util.Pair;
 import lu.kolja.expandedae.definition.ExpSettings;
 import lu.kolja.expandedae.enums.BlockingMode;
 import lu.kolja.expandedae.helper.base.IUpgradableMenu;
@@ -39,14 +38,16 @@ public abstract class MixinPatternProviderMenuAppFlux extends AEBaseMenu impleme
             at = @At("TAIL")
     )
     private void initToolbox(MenuType<?> menuType, int id, Inventory playerInventory, PatternProviderLogicHost host, CallbackInfo ci) {
-        this.registerClientAction("modifyPatterns", Pair.class, this::expandedae$modifyPatterns);
+        this.registerClientAction("modifyPatterns", Integer.class, this::expandedae$modifyPatterns);
     }
 
     @Override
-    public void expandedae$modifyPatterns(Pair<Boolean, Integer> info) {
-        if (this.isClientSide()) this.sendClientAction("modifyPatterns", info);
-        for (var slot : this.getSlots(SlotSemantics.ENCODED_PATTERN)) {
-            slot.set(PatternHelper.modifyPatterns(slot.getItem(), info, this.getPlayer().level()));
+    public void expandedae$modifyPatterns(Integer mult) {
+        if (this.isClientSide()) this.sendClientAction("modifyPatterns", mult);
+        else {
+            for (var slot : this.getSlots(SlotSemantics.ENCODED_PATTERN)) {
+                slot.set(PatternHelper.modifyPatterns(slot.getItem(), mult, this.getPlayer().level()));
+            }
         }
     }
 
