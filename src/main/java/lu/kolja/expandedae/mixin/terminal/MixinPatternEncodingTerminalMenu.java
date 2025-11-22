@@ -33,6 +33,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Mixin(value = PatternEncodingTermMenu.class, remap = false)
 public abstract class MixinPatternEncodingTerminalMenu extends MEStorageMenu implements IMenuCraftingPacket, IPatternEncodingTerminalMenu {
+    @Unique
+    private final String ACTION_MOVE_PATTERN = "movePattern";
+
     @Final
     @Shadow
     @Mutable
@@ -60,13 +63,6 @@ public abstract class MixinPatternEncodingTerminalMenu extends MEStorageMenu imp
         AtomicReference<Player> player = new AtomicReference<>();
         this.getActionSource().player().ifPresent(player::set);
         if (encodedPatternSlot.getItem() != ItemStack.EMPTY) {
-            if (KeybindUtil.isShiftDown()) {
-                if (player.get().getInventory().getFreeSlot() > 0) {
-                    player.get().addItem(encodedPatternSlot.getItem());
-                    encodedPatternSlot.set(ItemStack.EMPTY);
-                    encodedPatternSlot.setChanged();
-                }
-            }
 
             var terminalItem = expandedae$getTerminalItem(player.get());
             if (terminalItem == null) return;
@@ -101,8 +97,27 @@ public abstract class MixinPatternEncodingTerminalMenu extends MEStorageMenu imp
             remap = false)
     private void initHooks(MenuType<?> menuType, int id, Inventory ip, IPatternTerminalMenuHost host,
                            boolean bindInventory, CallbackInfo ci) {
-        registerClientAction("modifyPattern", Integer.class,
-                this::eae$ModifyPattern);
+        registerClientAction("modifyPattern", Integer.class, this::eae$ModifyPattern);
+        registerClientAction(ACTION_MOVE_PATTERN, Boolean.class, this::eae$MovePattern);
+    }
+
+    @Unique
+    public void eae$MovePattern(Boolean data) {
+        if (isClientSide()) {
+            sendClientAction(ACTION_MOVE_PATTERN, data);
+        } else {
+            if (!data) return;
+            var player = this.getPlayer();
+            /*if (player.getInventory().getFreeSlot() > 0) {
+                player.addItem(encodedPatternSlot.getItem());
+                encodedPatternSlot.set(ItemStack.EMPTY);
+                encodedPatternSlot.setChanged();
+            }*/
+            if (player.addItem(encodedPatternSlot.getItem())) {
+                encodedPatternSlot.set(ItemStack.EMPTY);
+                encodedPatternSlot.setChanged();
+            }
+        }
     }
 
     @Unique
