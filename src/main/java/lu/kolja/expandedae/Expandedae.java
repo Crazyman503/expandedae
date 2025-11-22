@@ -1,6 +1,10 @@
 package lu.kolja.expandedae;
 
+import appeng.api.client.StorageCellModels;
+import appeng.api.storage.StorageCells;
 import com.mojang.logging.LogUtils;
+import lu.kolja.expandedae.cell.dual.DualCellHandler;
+import lu.kolja.expandedae.client.ExpCellModels;
 import lu.kolja.expandedae.client.ExpandedaeClient;
 import lu.kolja.expandedae.datagen.conditionals.ModNotLoadedCondition;
 import lu.kolja.expandedae.definition.*;
@@ -67,5 +71,11 @@ public class Expandedae {
     private void commonSetup(final FMLCommonSetupEvent event) {
         new XMod();
         new ExpUpgrades(event);
+        event.enqueueWork(() -> {
+            StorageCells.addCellHandler(DualCellHandler.INSTANCE);
+            for (var cellModel : ExpCellModels.cellModels.object2ObjectEntrySet()) {
+                StorageCellModels.registerModel(cellModel.getKey(), cellModel.getValue());
+            }
+        });
     }
 }

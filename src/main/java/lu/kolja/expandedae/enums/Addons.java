@@ -3,6 +3,8 @@ package lu.kolja.expandedae.enums;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.LoadingModList;
+import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 
 public enum Addons {
     EXT("expatternprovider"),
@@ -23,7 +25,13 @@ public enum Addons {
     }
 
     private boolean isLoaded(String modId) {
-        return ModList.get().isLoaded(modId);
+        if (ModList.get() == null) {
+            return LoadingModList.get().getMods().stream()
+                    .map(ModInfo::getModId)
+                    .anyMatch(modId::equals);
+        } else {
+            return ModList.get().isLoaded(modId);
+        }
     }
 
     public Component getUnavailableTooltip() {

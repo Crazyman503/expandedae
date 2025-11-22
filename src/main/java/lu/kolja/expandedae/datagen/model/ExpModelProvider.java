@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.datagen;
+package lu.kolja.expandedae.datagen.model;
 
 import appeng.block.crafting.AbstractCraftingUnitBlock;
 import appeng.block.networking.EnergyCellBlock;
@@ -47,6 +47,7 @@ public class ExpModelProvider extends AE2BlockStateProvider {
                     .setModels(new ConfiguredModel(models().getBuilder("block/crafting/" + name + "_formed")));
             simpleBlockItem(block, model);
         }
+
     }
 
     private void basicItem(ItemLike item) {

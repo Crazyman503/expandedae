@@ -1,31 +1,22 @@
 package lu.kolja.expandedae.datagen;
 
-import appeng.api.ids.AETags;
 import appeng.api.util.AEColor;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEParts;
-import appeng.datagen.providers.tags.ConventionTags;
-import appeng.recipes.transform.TransformCircumstance;
-import appeng.recipes.transform.TransformRecipeBuilder;
 import com.glodblock.github.extendedae.common.EPPItemAndBlock;
 import gripe._90.megacells.definition.MEGABlocks;
 import gripe._90.megacells.definition.MEGAItems;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.datagen.conditionals.ModNotLoadedCondition;
+import lu.kolja.expandedae.definition.ExpItems;
 import lu.kolja.expandedae.enums.ExpTiers;
-import net.minecraft.core.registries.BuiltInRegistries;
+import lu.kolja.expandedae.xmod.megacells.MegaCells;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -35,7 +26,6 @@ import static appeng.core.definitions.AEParts.PATTERN_PROVIDER;
 import static lu.kolja.expandedae.definition.ExpBlocks.*;
 import static lu.kolja.expandedae.definition.ExpItems.*;
 import static lu.kolja.expandedae.enums.Addons.EXT;
-import static lu.kolja.expandedae.enums.Addons.GTCEU;
 import static lu.kolja.expandedae.enums.Addons.MEGA;
 import static lu.kolja.expandedae.enums.ExpTiers.*;
 import static net.minecraft.data.recipes.RecipeCategory.MISC;
@@ -181,6 +171,29 @@ public class ExpRecipeProvider extends RecipeProvider {
                                 .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
                                 ::save
                 ).build(out, craftingId("exp_energy_cell_mega"));
+        ShapelessRecipeBuilder.shapeless(MISC, DUAL_CELL_HOUSING)
+                .requires(ITEM_CELL_HOUSING)
+                .requires(FLUID_CELL_HOUSING)
+                .unlockedBy("has_item_cell_housing", has(ITEM_CELL_HOUSING))
+                .unlockedBy("has_fluid_cell_housing", has(FLUID_CELL_HOUSING))
+                .save(out, craftingId("exp_dual_storage_cell_housing"));
+        ConditionalRecipe.builder()
+                .addCondition(loaded(MEGA.mod))
+                .addRecipe(ShapelessRecipeBuilder.shapeless(MISC, MegaCells.DUAL_CELL_MEGA_HOUSING)
+                        .requires(MEGAItems.MEGA_ITEM_CELL_HOUSING)
+                        .requires(MEGAItems.MEGA_FLUID_CELL_HOUSING)
+                        .unlockedBy("has_mega_item_cell_housing", has(MEGAItems.MEGA_ITEM_CELL_HOUSING))
+                        .unlockedBy("has_mega_fluid_cell_housing", has(MEGAItems.MEGA_FLUID_CELL_HOUSING))
+                        ::save)
+                .build(out, craftingId("exp_dual_storage_cell_mega_housing"));
+        for (var cell : ExpItems.getCells().entrySet()) {
+            ShapelessRecipeBuilder.shapeless(MISC, cell.getKey())
+                    .requires(cell.getKey().asItem().coreItem)
+                    .requires(cell.getKey().asItem().housingItem)
+                    .unlockedBy("has_" + cell.getKey().id().getPath() + "_core_item", has(cell.getKey().asItem().coreItem))
+                    .unlockedBy("has_" + cell.getKey().id().getPath() + "_housing_item", has(cell.getKey().asItem().housingItem))
+                    .save(out, craftingId("exp_dual_storage_cell_" + cell.getKey().id().getPath()));
+        }
 
         upgrade(out, TIER_2, TIER_4);
         upgrade(out, TIER_4, TIER_8);
