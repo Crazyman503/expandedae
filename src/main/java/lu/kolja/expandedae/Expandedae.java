@@ -3,6 +3,7 @@ package lu.kolja.expandedae;
 import appeng.api.client.StorageCellModels;
 import appeng.api.storage.StorageCells;
 import com.mojang.logging.LogUtils;
+import lu.kolja.expandedae.cell.art.ArtUniverseCellHandler;
 import lu.kolja.expandedae.cell.dual.DualCellHandler;
 import lu.kolja.expandedae.client.ExpCellModels;
 import lu.kolja.expandedae.client.ExpandedaeClient;
@@ -73,6 +74,7 @@ public class Expandedae {
         new ExpUpgrades(event);
         event.enqueueWork(() -> {
             StorageCells.addCellHandler(DualCellHandler.INSTANCE);
+            StorageCells.addCellHandler(ArtUniverseCellHandler.INSTANCE);
             for (var cellModel : ExpCellModels.cellModels.object2ObjectEntrySet()) {
                 StorageCellModels.registerModel(cellModel.getKey(), cellModel.getValue());
             }

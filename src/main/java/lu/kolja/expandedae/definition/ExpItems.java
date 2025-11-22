@@ -13,6 +13,7 @@ import appeng.items.parts.PartItem;
 import appeng.items.parts.PartModelsHelper;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import lu.kolja.expandedae.Expandedae;
+import lu.kolja.expandedae.cell.art.ArtUniverseStorageCell;
 import lu.kolja.expandedae.cell.dual.AEKeyTypes;
 import lu.kolja.expandedae.cell.dual.DualStorageCell;
 import lu.kolja.expandedae.enums.Addons;
@@ -28,6 +29,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -90,6 +92,19 @@ public class ExpItems {
                     super.appendHoverText(stack, level, tooltip, advancedTooltips);
                 }
             }
+    );
+
+    public static final ItemDefinition<ArtUniverseStorageCell> ART_UNIVERSE_ITEM = item(
+            "Artificial Universe Item Storage Cell",
+            "artificial_universe_item_cell",
+            p -> new ArtUniverseStorageCell(p.stacksTo(1).rarity(Rarity.EPIC).fireResistant(),
+                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE  / 128, 63, AEKeyType.items())
+    );
+    public static final ItemDefinition<ArtUniverseStorageCell> ART_UNIVERSE_FLUID = item(
+            "Artificial Universe Fluid Storage Cell",
+            "artificial_universe_fluid_cell",
+            p -> new ArtUniverseStorageCell(p.stacksTo(1).rarity(Rarity.EPIC).fireResistant(),
+                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / 128, 63, AEKeyType.fluids())
     );
 
     public static final ItemDefinition<MaterialItem> DUAL_CELL_HOUSING = item("ME Dual Cell Housing", "dual_cell_housing", MaterialItem::new);

@@ -56,6 +56,8 @@
   "gui.tooltips.expandedae.modifyPatternsHintGT": "Multipliers: Shift 2x, Ctrl 8x",
   "info.expandedae.useless": "This is currently disabled",
   "item.expandedae.advanced_blocking_card.tooltip.1": "Exposes the entire networks contents when placed in an interface",
+  "item.expandedae.artificial_universe_fluid_cell": "Artificial Universe Fluid Storage Cell",
+  "item.expandedae.artificial_universe_item_cell": "Artificial Universe Item Storage Cell",
   "item.expandedae.auto_complete_card": "Auto Complete Card",
   "item.expandedae.auto_complete_card.tooltip.1": "Automatically completes the crafting job",
   "item.expandedae.auto_complete_card.tooltip.2": "Note: This only works for single requests",

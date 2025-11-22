@@ -1,6 +1,7 @@
 package lu.kolja.expandedae.client;
 
 import appeng.core.definitions.ItemDefinition;
+import appeng.items.AEBaseItem;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.cell.dual.DualStorageCell;
@@ -10,7 +11,7 @@ import lu.kolja.expandedae.xmod.megacells.MegaCells;
 import net.minecraft.resources.ResourceLocation;
 
 public class ExpCellModels {
-    public static final Object2ObjectOpenHashMap<ItemDefinition<DualStorageCell>, ResourceLocation> cellModels = new Object2ObjectOpenHashMap<>(10);
+    public static final Object2ObjectOpenHashMap<ItemDefinition<? extends AEBaseItem>, ResourceLocation> cellModels = new Object2ObjectOpenHashMap<>(10);
 
     public static final ResourceLocation DUAL_1K = cellModel(ExpItems.DUAL_1K, false);
     public static final ResourceLocation DUAL_4K = cellModel(ExpItems.DUAL_4K, false);
