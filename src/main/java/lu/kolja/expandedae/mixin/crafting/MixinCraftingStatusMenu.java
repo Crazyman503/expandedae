@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.mixin.cpu;
+package lu.kolja.expandedae.mixin.crafting;
 
 import appeng.menu.ISubMenu;
 import appeng.menu.me.crafting.CraftingCPUMenu;
@@ -30,6 +30,9 @@ public abstract class MixinCraftingStatusMenu extends CraftingCPUMenu implements
         this.registerClientAction(ACTION_CANCEL_ALL, this::expandedae$cancelAll);
     }
 
+    /**
+     * Cancel all currently running jobs
+     */
     @Unique
     @Override
     public void expandedae$cancelAll() {

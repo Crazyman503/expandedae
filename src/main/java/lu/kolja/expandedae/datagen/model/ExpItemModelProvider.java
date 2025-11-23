@@ -34,7 +34,7 @@ public class ExpItemModelProvider extends ItemModelProvider {
                 mcLoc("item/generated"),
                 "layer0",
                 Expandedae.makeId(background)
-        ).texture("layer1", "item/storage_cell_led");
+        ).texture("layer1", "ae2:item/storage_cell_led");
     }
 
     private void driveCell(ResourceLocation texture) {

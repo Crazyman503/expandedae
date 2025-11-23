@@ -18,7 +18,7 @@
     "compat.gtceu.MixinMEPatternBufferPartMachine",
     "cpu.MixinCPUSelectionList",
     "cpu.MixinCraftingCPUCluster",
-    "cpu.MixinCraftingStatusMenu",
+    "crafting.MixinCraftingStatusMenu",
     "emi.MixinEmiItemStackConverter",
     "emi.MixinEmiScreenBase",
     "misc.MixinControllerValidator",
@@ -34,11 +34,13 @@
   "client": [
     "accessor.AccessorBuiltInModelHooks",
     "compat.appflux.MixinPatternProviderScreenAppFlux",
-    "cpu.MixinCraftConfirmScreen",
-    "cpu.MixinCraftingStatusScreen",
-    "cpu.MixinModelBakery",
+    "crafting.MixinCraftConfirmScreen",
+    "cpu.MixinCraftingCPUScreen",
+    "crafting.MixinCraftingStatusScreen",
+    "misc.MixinModelBakery",
     "misc.MixinSettingToggleButton",
-    "patternprovider.MixinPatternProviderScreen"
+    "patternprovider.MixinPatternProviderScreen",
+    "terminal.MixinPatternEncodingTermScreen"
   ],
   "injectors": {
     "defaultRequire": 1

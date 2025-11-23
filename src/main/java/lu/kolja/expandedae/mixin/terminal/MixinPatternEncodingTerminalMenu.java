@@ -16,7 +16,6 @@ import appeng.menu.slot.RestrictedInputSlot;
 import appeng.util.ConfigInventory;
 import de.mari_023.ae2wtlib.wut.WUTHandler;
 import lu.kolja.expandedae.definition.ExpItems;
-import lu.kolja.expandedae.helper.misc.KeybindUtil;
 import lu.kolja.expandedae.helper.patternprovider.IPatternEncodingTerminalMenu;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -107,7 +106,7 @@ public abstract class MixinPatternEncodingTerminalMenu extends MEStorageMenu imp
             sendClientAction(ACTION_MOVE_PATTERN, data);
         } else {
             if (!data) return;
-            var player = this.getPlayer();
+            var player = this.getPlayer(); // TODO: Fix this, still kinda broken
             /*if (player.getInventory().getFreeSlot() > 0) {
                 player.addItem(encodedPatternSlot.getItem());
                 encodedPatternSlot.set(ItemStack.EMPTY);

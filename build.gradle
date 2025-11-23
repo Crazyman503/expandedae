@@ -169,8 +169,6 @@ dependencies {
     modImplementation "dev.emi:emi-forge:${emi_version}"
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
-
-
     for (extraModJar in fileTree(dir: "extra-mods", include: '*.jar')) {
         def basename = extraModJar.name.substring(0, extraModJar.name.length() - ".jar".length())
         def versionSep = basename.lastIndexOf('-')

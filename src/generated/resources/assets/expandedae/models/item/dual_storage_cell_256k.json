@@ -2,6 +2,6 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "expandedae:item/dual_storage_cell_256k",
-    "layer1": "expandedae:item/storage_cell_led"
+    "layer1": "ae2:item/storage_cell_led"
   }
 }

@@ -47,7 +47,10 @@ public enum ExpLang implements LocalizationEnum {
     GROUP_PATTERN_ENCODING_TERMINAL_NAME("group.pattern_encoding_terminal.name", "ME Pattern Encoding Terminal"),
 
     CANCEL_ALL("gui.expandedae.cancel_all", "Cancel All"),
-    CANCEL_ALL_HINT("gui.expandedae.cancel_all.hint", "Cancel all running Crafts");
+    CANCEL_CONFIRM("gui.expandedae.cancel_confirm", "§4Confirm"),
+    CANCEL_CONFIRM_HINT("gui.expandedae.cancel_confirm.hint", "Press to confirm"),
+    CANCEL_ALL_HINT("gui.expandedae.cancel_all.hint", "Cancel all running Crafts"),
+    BYTES_USED("gui.expandedae.bytes_used", "%sB Used");
 
     private final String key;
     private final String text;

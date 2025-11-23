@@ -25,10 +25,10 @@
       "height": 137
     },
     "cancelAll": {
-      "left": 8,
-      "bottom": 25,
+      "left": -86,
+      "bottom": 17,
       "width": 69,
-      "height": 20
+      "height": 17
     }
   },
   "text": {
