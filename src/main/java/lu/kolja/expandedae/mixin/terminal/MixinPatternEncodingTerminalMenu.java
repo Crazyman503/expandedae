@@ -106,14 +106,10 @@ public abstract class MixinPatternEncodingTerminalMenu extends MEStorageMenu imp
             sendClientAction(ACTION_MOVE_PATTERN, data);
         } else {
             if (!data) return;
-            var player = this.getPlayer(); // TODO: Fix this, still kinda broken
-            /*if (player.getInventory().getFreeSlot() > 0) {
+            var player = this.getPlayer();
+            // Need to do this check first because #addItem ignores that there are no free slots if the player is in creative mode
+            if (player.getInventory().getFreeSlot() > 0) {
                 player.addItem(encodedPatternSlot.getItem());
-                encodedPatternSlot.set(ItemStack.EMPTY);
-                encodedPatternSlot.setChanged();
-            }*/
-            if (player.addItem(encodedPatternSlot.getItem())) {
-                encodedPatternSlot.set(ItemStack.EMPTY);
                 encodedPatternSlot.setChanged();
             }
         }
