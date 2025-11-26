@@ -97,7 +97,7 @@ public class ArtUniverseCellInventory implements StorageCell {
             }
             maxTypes = Math.min(maxTypes, this.maxItemTypes);
 
-            long totalStorage = (getTotalBytes() - getBytesPerType() * maxTypes) * keyType.getAmountPerByte();
+            long totalStorage = (getTotalBytes() - getBytesPerType() * maxTypes) * getAmountPerByte();
             // Technically not exactly evenly distributed, but close enough!
             this.maxItemsPerType = Math.max(0, (totalStorage + maxTypes - 1) / maxTypes);
         } else {
@@ -307,23 +307,23 @@ public class ArtUniverseCellInventory implements StorageCell {
     }
 
     public long getUsedBytes() {
-        var bytesForItemCount = (this.getStoredItemCount() + this.getUnusedItemCount()) / keyType.getAmountPerByte();
+        var bytesForItemCount = (this.getStoredItemCount() + this.getUnusedItemCount()) / getAmountPerByte();
         return this.getStoredItemTypes() * this.getBytesPerType() + bytesForItemCount;
     }
 
     public long getRemainingItemCount() {
-        final long remaining = this.getFreeBytes() * keyType.getAmountPerByte() + this.getUnusedItemCount();
+        final long remaining = this.getFreeBytes() * getAmountPerByte() + this.getUnusedItemCount();
         return remaining > 0 ? remaining : 0;
     }
 
     public long getUnusedItemCount() {
-        final var div = (this.getStoredItemCount() % keyType.getAmountPerByte());
+        final var div = (this.getStoredItemCount() % getAmountPerByte());
 
         if (div == 0) {
             return 0;
         }
 
-        return keyType.getAmountPerByte() - div;
+        return getAmountPerByte() - div;
     }
 
     @Override
@@ -388,7 +388,7 @@ public class ArtUniverseCellInventory implements StorageCell {
                 return 0;
             }
 
-            remainingItemCount -= this.getBytesPerType() * keyType.getAmountPerByte();
+            remainingItemCount -= this.getBytesPerType() * getAmountPerByte();
             if (remainingItemCount <= 0) {
                 return 0;
             }
@@ -436,5 +436,9 @@ public class ArtUniverseCellInventory implements StorageCell {
     @Override
     public Component getDescription() {
         return i.getHoverName();
+    }
+    
+    private long getAmountPerByte() {
+        return 8; // Ignore which keytype we're using
     }
 }
