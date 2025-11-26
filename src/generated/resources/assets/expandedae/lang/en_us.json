@@ -83,6 +83,14 @@
   "item.expandedae.mega_dual_cell_housing": "ME MEGA Dual Cell Housing",
   "item.expandedae.pattern_refiller_card": "Pattern Refiller Card",
   "item.expandedae.pattern_refiller_card.tooltip.1": "Automatically refills the blank patterns",
+  "item.expandedae.priority_card": "Priority Card",
+  "item.expandedae.priority_card.hint.1": "Shift-click a block/part to modify its priority",
+  "item.expandedae.priority_card.hint.2": "Shift-click the air to reset the internal priority",
+  "item.expandedae.priority_card.hint.3": "Right-click the air to toggle the mode",
   "item.expandedae.upgrade.tooltip": "Upgrade %s",
-  "itemGroup.eae": "Expanded AE"
+  "itemGroup.eae": "Expanded AE",
+  "msg.expandedae.mode_changed": "Changed mode to %s",
+  "msg.expandedae.prio_changed": "Set priority of %s to %s",
+  "msg.expandedae.prio_reset": "Reset priority to %s",
+  "text.expandedae.card": "Current: %s"
 }

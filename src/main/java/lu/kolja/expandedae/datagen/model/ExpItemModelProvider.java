@@ -26,6 +26,7 @@ public class ExpItemModelProvider extends ItemModelProvider {
         }
         basicItem(ExpItems.DUAL_CELL_HOUSING.asItem());
         basicItem(MegaCells.DUAL_CELL_MEGA_HOUSING.asItem());
+        basicItem(ExpItems.PRIORITY_CARD.asItem());
     }
 
     private void storageCell(ItemDefinition<?> item, String background) {

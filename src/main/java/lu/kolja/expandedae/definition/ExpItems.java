@@ -18,6 +18,7 @@ import lu.kolja.expandedae.cell.dual.AEKeyTypes;
 import lu.kolja.expandedae.cell.dual.DualStorageCell;
 import lu.kolja.expandedae.enums.Addons;
 import lu.kolja.expandedae.item.misc.ExpPatternProviderUpgradeItem;
+import lu.kolja.expandedae.item.misc.PriorityCardItem;
 import lu.kolja.expandedae.item.part.ExpPatternProviderPartItem;
 import lu.kolja.expandedae.part.ExpPatternProviderPart;
 import lu.kolja.expandedae.xmod.megacells.MegaCells;
@@ -105,6 +106,12 @@ public class ExpItems {
             "artificial_universe_fluid_cell",
             p -> new ArtUniverseStorageCell(p.stacksTo(1).rarity(Rarity.EPIC).fireResistant(),
                     100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / 128, 63, AEKeyType.fluids())
+    );
+
+    public static final ItemDefinition<PriorityCardItem> PRIORITY_CARD = item(
+            "Priority Card",
+            "priority_card",
+            p -> new PriorityCardItem(p.stacksTo(1).rarity(Rarity.UNCOMMON))
     );
 
     public static final ItemDefinition<MaterialItem> DUAL_CELL_HOUSING = item("ME Dual Cell Housing", "dual_cell_housing", MaterialItem::new);

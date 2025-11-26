@@ -50,7 +50,16 @@ public enum ExpLang implements LocalizationEnum {
     CANCEL_CONFIRM("gui.expandedae.cancel_confirm", "§4Confirm"),
     CANCEL_CONFIRM_HINT("gui.expandedae.cancel_confirm.hint", "Press to confirm"),
     CANCEL_ALL_HINT("gui.expandedae.cancel_all.hint", "Cancel all running Crafts"),
-    BYTES_USED("gui.expandedae.bytes_used", "%sB Used");
+    BYTES_USED("gui.expandedae.bytes_used", "%sB Used"),
+    PRIO_CHANGED("msg.expandedae.prio_changed", "Set priority of %s to %s"),
+
+    PRIO_RESET("msg.expandedae.prio_reset", "Reset priority to %s"),
+    CHANGED_MODE("msg.expandedae.mode_changed", "Changed mode to %s"),
+
+    PRIO_CARD_HINT_1("item.expandedae.priority_card.hint.1", "Shift-click a block/part to modify its priority"),
+    PRIO_CARD_HINT_2("item.expandedae.priority_card.hint.2", "Shift-click the air to reset the internal priority"),
+    PRIO_CARD_HINT_3("item.expandedae.priority_card.hint.3", "Right-click the air to toggle the mode"),
+    CURRENT("text.expandedae.card", "Current: %s");
 
     private final String key;
     private final String text;
