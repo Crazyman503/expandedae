@@ -2,6 +2,7 @@ package lu.kolja.expandedae.datagen;
 
 import appeng.api.util.AEColor;
 import appeng.core.definitions.AEBlocks;
+import appeng.core.definitions.AEItems;
 import appeng.core.definitions.AEParts;
 import com.glodblock.github.extendedae.common.EPPItemAndBlock;
 import gripe._90.megacells.definition.MEGABlocks;
@@ -186,6 +187,16 @@ public class ExpRecipeProvider extends RecipeProvider {
                         .unlockedBy("has_mega_fluid_cell_housing", has(MEGAItems.MEGA_FLUID_CELL_HOUSING))
                         ::save)
                 .build(out, craftingId("exp_dual_storage_cell_mega_housing"));
+
+        ShapelessRecipeBuilder.shapeless(MISC, PRIORITY_CARD)
+                .requires(MEMORY_CARD)
+                .requires(CERTUS_QUARTZ_CRYSTAL_CHARGED)
+                .requires(FLUIX_CRYSTAL)
+                .unlockedBy("has_memory_card", has(MEMORY_CARD))
+                .unlockedBy("has_certus_quartz_crystal_charged", has(CERTUS_QUARTZ_CRYSTAL_CHARGED))
+                .unlockedBy("has_fluix_crystal", has(FLUIX_CRYSTAL))
+                .save(out, craftingId("priority_card"));
+
         for (var cell : ExpItems.getCells().entrySet()) {
             ShapelessRecipeBuilder.shapeless(MISC, cell.getKey())
                     .requires(cell.getKey().asItem().coreItem)

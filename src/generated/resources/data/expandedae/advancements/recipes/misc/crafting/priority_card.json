@@ -1,0 +1,61 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_certus_quartz_crystal_charged": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ae2:charged_certus_quartz_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_fluix_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ae2:fluix_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_memory_card": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ae2:memory_card"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "expandedae:crafting/priority_card"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_memory_card",
+      "has_certus_quartz_crystal_charged",
+      "has_fluix_crystal",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "expandedae:crafting/priority_card"
+    ]
+  },
+  "sends_telemetry_event": false
+}
