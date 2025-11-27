@@ -16,6 +16,7 @@ import com.google.common.collect.ImmutableList;
 import lu.kolja.expandedae.helper.cpu.ISearchScreen;
 import lu.kolja.expandedae.helper.cpu.TableEntrySorters;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +24,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -82,16 +82,17 @@ public abstract class MixinCraftingCPUScreen<T extends CraftingCPUMenu> extends 
      * When the duration is stuck, it'll default to a very large number that would overlap into the search field,
      * this replaces it with "∞" in that case
      */
-    @ModifyArg(
+    @Redirect(
             method = "updateBeforeRender",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/network/chat/MutableComponent;append(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;",
                     ordinal = 0
-            )
+            ),
+            remap = true
     )
-    private String eae$formatDuration(String duration) {
-        return duration.equals(" - 2562047:47:16") ? " - ∞" : duration;
+    private MutableComponent eae$formatDuration(MutableComponent instance, String duration) {
+        return instance.append(duration.equals(" - 2562047:47:16") ? " - ∞" : duration);
     }
 
     /**
