@@ -2,7 +2,6 @@ package lu.kolja.expandedae.datagen;
 
 import appeng.api.util.AEColor;
 import appeng.core.definitions.AEBlocks;
-import appeng.core.definitions.AEItems;
 import appeng.core.definitions.AEParts;
 import com.glodblock.github.extendedae.common.EPPItemAndBlock;
 import gripe._90.megacells.definition.MEGABlocks;

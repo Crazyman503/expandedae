@@ -1,17 +1,15 @@
 package lu.kolja.expandedae.cell.dual;
 
-import java.util.List;
-import java.util.Optional;
-
+import appeng.api.stacks.AEKey;
+import appeng.api.stacks.AEKeyType;
 import appeng.api.storage.cells.ICellWorkbenchItem;
 import com.google.common.base.Preconditions;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 
-import appeng.api.stacks.AEKey;
-import appeng.api.stacks.AEKeyType;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Implement this on any item to register a "dual cell", which is a cell that works similarly to AE2's own item and

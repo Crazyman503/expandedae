@@ -378,7 +378,11 @@
           "SMITHING_TABLE_ADDITION",
           "SMITHING_TABLE_RESULT",
           "STONECUTTING_INPUT",
-          "MISSING_INGREDIENT"
+          "MISSING_INGREDIENT",
+          "EXP_PAGE_1",
+          "EXP_PAGE_2",
+          "EXP_PAGE_3",
+          "EXP_PAGE_4"
         ]
       }
     },

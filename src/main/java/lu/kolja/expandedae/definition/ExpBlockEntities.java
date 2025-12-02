@@ -8,6 +8,7 @@ import appeng.core.definitions.BlockDefinition;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.block.entity.ExpIOPortBlockEntity;
 import lu.kolja.expandedae.block.entity.ExpPatternProviderBlockEntity;
+import lu.kolja.expandedae.block.entity.GigaPatternProviderBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -39,6 +40,12 @@ public class ExpBlockEntities {
             EnergyCellBlockEntity.class,
             EnergyCellBlockEntity::new,
             ExpBlocks.EXP_ENERGY_CELL
+    );
+    public static final BlockEntityType<GigaPatternProviderBlockEntity> GIGA_PATTERN_PROVIDER = create(
+            "giga_pattern_provider",
+            GigaPatternProviderBlockEntity.class,
+            GigaPatternProviderBlockEntity::new,
+            ExpBlocks.GIGA_PATTERN_PROVIDER
     );
 
     public static final BlockEntityType<CraftingBlockEntity> EXP_CPUS = create(

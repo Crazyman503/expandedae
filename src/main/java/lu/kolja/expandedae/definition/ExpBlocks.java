@@ -8,8 +8,7 @@ import appeng.core.definitions.BlockDefinition;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.block.block.ExpIOPortBlock;
 import lu.kolja.expandedae.block.block.ExpPatternProviderBlock;
-import lu.kolja.expandedae.block.item.ExpIOPortBlockItem;
-import lu.kolja.expandedae.block.item.ExpPatternProviderBlockItem;
+import lu.kolja.expandedae.block.block.GigaPatternProviderBlock;
 import lu.kolja.expandedae.enums.ExpTiers;
 import lu.kolja.expandedae.item.misc.ExpCPUItem;
 import net.minecraft.world.item.BlockItem;
@@ -31,19 +30,25 @@ public class ExpBlocks {
             "Expanded Pattern Provider",
             "exp_pattern_provider",
             ExpPatternProviderBlock::new,
-            ExpPatternProviderBlockItem::new
+            AEBaseBlockItem::new
     );
     public static final BlockDefinition<ExpIOPortBlock> EXP_IO_PORT = block(
             "Expanded IO Port",
             "exp_io_port",
             ExpIOPortBlock::new,
-            ExpIOPortBlockItem::new
+            AEBaseBlockItem::new
     );
     public static final BlockDefinition<EnergyCellBlock> EXP_ENERGY_CELL = block(
             "Expanded Energy Cell",
             "exp_energy_cell",
             () -> new EnergyCellBlock(Long.MAX_VALUE / 1000d, Integer.MAX_VALUE, Integer.MAX_VALUE - 1), // Creative energy cells have priority Integer.MAX_VALUE
             EnergyCellBlockItem::new
+    );
+    public static final BlockDefinition<GigaPatternProviderBlock> GIGA_PATTERN_PROVIDER = block(
+            "Giga Pattern Provider",
+            "giga_pattern_provider",
+            GigaPatternProviderBlock::new,
+            AEBaseBlockItem::new
     );
 
     public static final BlockDefinition<CraftingUnitBlock> EXP_CRAFTING_UNIT = block(

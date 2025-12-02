@@ -2,7 +2,6 @@ package lu.kolja.expandedae.mixin.misc;
 
 import appeng.blockentity.networking.ControllerBlockEntity;
 import appeng.me.pathfinding.ControllerValidator;
-import java.util.Collection;
 import lu.kolja.expandedae.ExpConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -10,6 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
+
+import java.util.Collection;
 
 @Mixin(value = ControllerValidator.class, remap = false)
 public abstract class MixinControllerValidator {

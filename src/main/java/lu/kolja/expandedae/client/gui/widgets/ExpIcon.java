@@ -13,6 +13,8 @@ public enum ExpIcon {
     DIVISION_2(64, 0),
     DIVISION_3(80, 0),
     DIVISION_8(96, 0),
+    NEXT_PAGE(0, 240),
+    PREV_PAGE(16, 240),
     TOOLBAR_BUTTON_BACKGROUND(240, 240);
 
     public final int x;

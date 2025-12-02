@@ -1,6 +1,6 @@
 package lu.kolja.expandedae.client.gui.widgets;
 
-import lu.kolja.expandedae.definition.ExpText;
+import lu.kolja.expandedae.definition.ExpLang;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,16 +17,25 @@ public class ExpActionButton extends ExpIconButton{
 
     public ExpActionButton(ExpActionItems action, Consumer<ExpActionItems> onPress) {
         super((btn) -> onPress.accept(action));
-        ExpText displayName;
-        ExpText displayValue;
+        Component displayName;
+        Component displayValue;
         switch (action) {
-            case MODIFY_PATTERNS:
+            case MODIFY_PATTERNS -> {
                 this.icon = ExpIcon.MODIFY_PATTERNS;
-                displayName = ExpText.modifyPatterns;
-                displayValue = ExpText.modifyPatternsHint;
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown ActionItem: " + action);
+                displayName = ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS.text();
+                displayValue = ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS_HINT.text();
+            }
+            case NEXT_PAGE -> {
+                this.icon = ExpIcon.NEXT_PAGE;
+                displayName = ExpLang.SWITCH_PAGE.text("Next");
+                displayValue = ExpLang.SWITCH_PAGE_HINT.text("Next");
+            }
+            case PREV_PAGE -> {
+                this.icon = ExpIcon.PREV_PAGE;
+                displayName = ExpLang.SWITCH_PAGE.text("Previous");
+                displayValue = ExpLang.SWITCH_PAGE_HINT.text("Previous");
+            }
+            default -> throw new IllegalArgumentException("Unknown ActionItem: " + action);
         }
         this.setMessage(this.buildMessage(displayName, displayValue));
     }
@@ -35,12 +44,12 @@ public class ExpActionButton extends ExpIconButton{
         return this.icon;
     }
 
-    private Component buildMessage(ExpText displayName, @Nullable ExpText displayValue) {
-        String name = displayName.text().getString();
+    private Component buildMessage(Component displayName, @Nullable Component displayValue) {
+        String name = displayName.getString();
         if (displayValue == null) {
             return Component.literal(name);
         } else {
-            String value = displayValue.text().getString();
+            String value = displayValue.getString();
             value = PATTERN_NEW_LINE.matcher(value).replaceAll("\n");
             StringBuilder sb = new StringBuilder(value);
             int i = sb.lastIndexOf("\n");

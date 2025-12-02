@@ -10,7 +10,9 @@ import lu.kolja.expandedae.definition.ExpCreativeTab;
 import lu.kolja.expandedae.definition.ExpMenus;
 import lu.kolja.expandedae.enums.ExpTiers;
 import lu.kolja.expandedae.menu.ExpPatternProviderMenu;
+import lu.kolja.expandedae.menu.GigaPatternProviderMenu;
 import lu.kolja.expandedae.screen.ExpIOPortScreen;
+import lu.kolja.expandedae.screen.GigaPatternProviderScreen;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -43,6 +45,11 @@ public class ExpandedaeClient {
                 ExpMenus.EXP_IO_PORT,
                 ExpIOPortScreen::new,
                 "/screens/exp_io_port.json"
+        );
+        InitScreens.register(
+                ExpMenus.GIGA_PATTERN_PROVIDER,
+                GigaPatternProviderScreen<GigaPatternProviderMenu>::new,
+                "/screens/giga_pattern_provider.json"
         );
     }
 

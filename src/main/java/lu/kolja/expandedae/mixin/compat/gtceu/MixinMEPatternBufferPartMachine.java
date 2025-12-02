@@ -13,7 +13,6 @@ import com.gregtechceu.gtceu.integration.ae2.machine.MEBusPartMachine;
 import com.gregtechceu.gtceu.integration.ae2.machine.MEPatternBufferPartMachine;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.lowdragmc.lowdraglib.gui.texture.GuiTextureGroup;
-import com.mojang.datafixers.util.Pair;
 import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.helper.misc.KeybindUtil;
 import lu.kolja.expandedae.helper.misc.PatternHelper;

@@ -2,9 +2,10 @@ package lu.kolja.expandedae.mixin.accessor;
 
 import appeng.api.crafting.IPatternDetails;
 import appeng.crafting.execution.ExecutingCraftingJob;
-import java.util.Map;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+
+import java.util.Map;
 
 @Mixin(value = ExecutingCraftingJob.class, remap = false)
 public interface AccessorExecutingCraftingJob {

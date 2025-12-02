@@ -29,7 +29,7 @@ public class TableEntrySorters {
 
         public static final Comparator<CraftingStatusEntry> MOD_DESC = MOD_ASC.reversed();
 
-        public static Comparator<CraftingStatusEntry> getComparator (SortOrder order, SortDir dir){
+        public static Comparator<CraftingStatusEntry> getComparator(SortOrder order, SortDir dir){
             return switch (order) {
                 case NAME -> dir == SortDir.ASCENDING ? NAME_ASC : NAME_DESC;
                 case MOD -> dir == SortDir.ASCENDING ? MOD_ASC : MOD_DESC;

@@ -7,6 +7,7 @@ import appeng.menu.implementations.MenuTypeBuilder;
 import lu.kolja.expandedae.block.entity.ExpIOPortBlockEntity;
 import lu.kolja.expandedae.menu.ExpIOPortMenu;
 import lu.kolja.expandedae.menu.ExpPatternProviderMenu;
+import lu.kolja.expandedae.menu.GigaPatternProviderMenu;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 
@@ -32,6 +33,12 @@ public class ExpMenus {
             "exp_io_port",
             ExpIOPortMenu::new,
             ExpIOPortBlockEntity.class
+    );
+
+    public static final MenuType<GigaPatternProviderMenu> GIGA_PATTERN_PROVIDER = create(
+            "giga_pattern_provider",
+            GigaPatternProviderMenu::new,
+            PatternProviderLogicHost.class
     );
 
     public static <C extends AEBaseMenu, I> MenuType<C> create(

@@ -59,7 +59,10 @@ public enum ExpLang implements LocalizationEnum {
     PRIO_CARD_HINT_1("item.expandedae.priority_card.hint.1", "Shift-click a block/part to modify its priority"),
     PRIO_CARD_HINT_2("item.expandedae.priority_card.hint.2", "Shift-click the air to reset the internal priority"),
     PRIO_CARD_HINT_3("item.expandedae.priority_card.hint.3", "Right-click the air to toggle the mode"),
-    CURRENT("text.expandedae.card", "Current: %s");
+    CURRENT("text.expandedae.card", "Current: %s"),
+
+    SWITCH_PAGE("gui.expandedae.switch_page", "%s Page"),
+    SWITCH_PAGE_HINT("gui.expandedae.switch_page.hint", "Click to go to the %s page");
 
     private final String key;
     private final String text;

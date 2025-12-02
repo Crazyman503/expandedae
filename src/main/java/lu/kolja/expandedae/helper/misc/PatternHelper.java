@@ -3,7 +3,6 @@ package lu.kolja.expandedae.helper.misc;
 import appeng.api.crafting.PatternDetailsHelper;
 import appeng.api.stacks.GenericStack;
 import appeng.crafting.pattern.AEProcessingPattern;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
