@@ -99,13 +99,13 @@ public class ExpItems {
             "Artificial Universe Item Storage Cell",
             "artificial_universe_item_cell",
             p -> new ArtUniverseStorageCell(p.stacksTo(1).rarity(Rarity.EPIC).fireResistant(),
-                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE  / 128, 63, AEKeyType.items())
+                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / (8 * 128), 63, AEKeyType.items())
     );
     public static final ItemDefinition<ArtUniverseStorageCell> ART_UNIVERSE_FLUID = item(
             "Artificial Universe Fluid Storage Cell",
             "artificial_universe_fluid_cell",
             p -> new ArtUniverseStorageCell(p.stacksTo(1).rarity(Rarity.EPIC).fireResistant(),
-                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / 128, 63, AEKeyType.fluids())
+                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / (8 * 128), 63, AEKeyType.fluids())
     );
 
     public static final ItemDefinition<PriorityCardItem> PRIORITY_CARD = item(
