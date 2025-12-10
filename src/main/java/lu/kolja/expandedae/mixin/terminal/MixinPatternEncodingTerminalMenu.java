@@ -66,7 +66,7 @@ public abstract class MixinPatternEncodingTerminalMenu extends MEStorageMenu imp
             var terminalItem = expandedae$getTerminalItem(player.get());
             if (terminalItem == null) return;
             if (terminalItem.getItem() instanceof IUpgradeableItem item) {
-                IUpgradeInventory inventory = item.getUpgrades(player.get().getMainHandItem());
+                IUpgradeInventory inventory = item.getUpgrades(terminalItem);
                 if (!inventory.isInstalled(ExpItems.PATTERN_REFILLER_CARD)) return;
             }
 
