@@ -18,6 +18,7 @@ import lu.kolja.expandedae.cell.dual.AEKeyTypes;
 import lu.kolja.expandedae.cell.dual.DualStorageCell;
 import lu.kolja.expandedae.enums.Addons;
 import lu.kolja.expandedae.item.misc.ExpPatternProviderUpgradeItem;
+import lu.kolja.expandedae.item.linked.LinkedTerminalItem;
 import lu.kolja.expandedae.item.misc.PriorityCardItem;
 import lu.kolja.expandedae.item.part.ExpPatternProviderPartItem;
 import lu.kolja.expandedae.part.ExpPatternProviderPart;
@@ -91,17 +92,23 @@ public class ExpItems {
             }
     );
 
+    public static final ItemDefinition<LinkedTerminalItem> LINKED_TERMINAL = item(
+            "Linked Terminal",
+            "linked_terminal",
+            p -> new LinkedTerminalItem(p.stacksTo(1).rarity(Rarity.RARE))
+    );
+
     public static final ItemDefinition<ArtUniverseStorageCell> ART_UNIVERSE_ITEM = item(
             "Artificial Universe Item Storage Cell",
             "artificial_universe_item_cell",
             p -> new ArtUniverseStorageCell(p.stacksTo(1).rarity(Rarity.EPIC).fireResistant(),
-                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE  / 128, 63, AEKeyType.items())
+                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / (8 * 128), 63, AEKeyType.items())
     );
     public static final ItemDefinition<ArtUniverseStorageCell> ART_UNIVERSE_FLUID = item(
             "Artificial Universe Fluid Storage Cell",
             "artificial_universe_fluid_cell",
             p -> new ArtUniverseStorageCell(p.stacksTo(1).rarity(Rarity.EPIC).fireResistant(),
-                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / 128, 63, AEKeyType.fluids())
+                    100d, Long.MAX_VALUE / 8, Long.MAX_VALUE / (8 * 128), 63, AEKeyType.fluids())
     );
 
     public static final ItemDefinition<PriorityCardItem> PRIORITY_CARD = item(

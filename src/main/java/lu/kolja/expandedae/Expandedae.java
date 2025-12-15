@@ -1,6 +1,7 @@
 package lu.kolja.expandedae;
 
 import appeng.api.client.StorageCellModels;
+import appeng.api.features.GridLinkables;
 import appeng.api.storage.StorageCells;
 import com.mojang.logging.LogUtils;
 import lu.kolja.expandedae.cell.art.ArtUniverseCellHandler;
@@ -9,6 +10,8 @@ import lu.kolja.expandedae.client.ExpCellModels;
 import lu.kolja.expandedae.client.ExpandedaeClient;
 import lu.kolja.expandedae.datagen.conditionals.ModNotLoadedCondition;
 import lu.kolja.expandedae.definition.*;
+import lu.kolja.expandedae.item.linked.LinkedTerminalItem;
+import lu.kolja.expandedae.network.ExpNetworkHandler;
 import lu.kolja.expandedae.xmod.XMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -73,6 +76,8 @@ public class Expandedae {
         new XMod();
         new ExpUpgrades(event);
         event.enqueueWork(() -> {
+            ExpNetworkHandler.registerPackets();
+            GridLinkables.register(ExpItems.LINKED_TERMINAL, LinkedTerminalItem.handler);
             StorageCells.addCellHandler(DualCellHandler.INSTANCE);
             StorageCells.addCellHandler(ArtUniverseCellHandler.INSTANCE);
             for (var cellModel : ExpCellModels.cellModels.object2ObjectEntrySet()) {
