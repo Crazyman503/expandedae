@@ -35,6 +35,11 @@ public class ExpActionButton extends ExpIconButton{
                 displayName = ExpLang.SWITCH_PAGE.text("Previous");
                 displayValue = ExpLang.SWITCH_PAGE_HINT.text("Previous");
             }
+            case ADD_MISSING -> {
+                this.icon = ExpIcon.ADD_MISSING;
+                displayName = ExpLang.GUI_TOOLTIPS_ADD_MISSING.text();
+                displayValue = ExpLang.GUI_TOOLTIPS_ADD_MISSING_HINT.text();
+            }
             default -> throw new IllegalArgumentException("Unknown ActionItem: " + action);
         }
         this.setMessage(this.buildMessage(displayName, displayValue));

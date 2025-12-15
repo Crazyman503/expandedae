@@ -48,6 +48,7 @@ legacyForge {
             systemProperty 'forge.logging.markers', 'REGISTRIES'
             systemProperty 'forge.logging.console.level', 'debug'
             systemProperty 'forge.enabledGameTestNamespaces', 'expandedae'
+            programArguments.addAll('--existing-mod', 'ae2')
         }
 
         server {
@@ -132,6 +133,9 @@ repositories {
     maven {
         url = "https://maven.bawnorton.com/releases"
     }
+    maven {
+        url "https://maven.shedaniel.me"
+    }
     flatDir {
         name "extra-mods"
         dir file(extraModsDir)
@@ -140,7 +144,7 @@ repositories {
 
 dependencies {
     // literally AE2
-    modImplementation "appeng:appliedenergistics2-forge:15.4.10"
+    modImplementation("appeng:appliedenergistics2-forge:15.4.10") {transitive = false}
     modImplementation "curse.maven:guideme-1173950:6489464"
 
     // AE Addons
@@ -161,13 +165,24 @@ dependencies {
 
     modRuntimeOnly "curse.maven:jade-324717:6271651"
     modRuntimeOnly "curse.maven:observable-509575:5643037"
-    modRuntimeOnly "curse.maven:architectury-api-419699:5137938"
+    modImplementation "curse.maven:architectury-api-419699:5137938"
     modRuntimeOnly "curse.maven:kotlin-for-forge-351264:5402061"
 
     modRuntimeOnly "curse.maven:mekanism-268560:6552911"
     modRuntimeOnly "curse.maven:patchouli-306770:6164575"
-    modImplementation "dev.emi:emi-forge:${emi_version}"
-    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+    modCompileOnly "dev.emi:emi-forge:${emi_version}"
+    modCompileOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-forge:${rei_version}"
+
+    if (recipemanager_mod == "jei") {
+        modRuntimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
+    } else if (recipemanager_mod == "rei") {
+        modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-forge:${rei_version}"
+    } else {
+        modRuntimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
+        modRuntimeOnly "dev.emi:emi-forge:${emi_version}"
+    }
 
     for (extraModJar in fileTree(dir: "extra-mods", include: '*.jar')) {
         def basename = extraModJar.name.substring(0, extraModJar.name.length() - ".jar".length())
@@ -184,6 +199,7 @@ dependencies {
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1"))
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.6-beta.1"))
     implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.3.6-beta.1"))
+    implementation "dev.vfyjxf:mixin-hotswap-agent:1.1"
 }
 
 

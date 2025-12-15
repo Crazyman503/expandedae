@@ -3,8 +3,10 @@ package lu.kolja.expandedae.mixin.crafting;
 import appeng.api.config.Settings;
 import appeng.api.config.SortDir;
 import appeng.api.config.SortOrder;
+import appeng.api.stacks.GenericStack;
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.me.crafting.CraftConfirmScreen;
+import appeng.client.gui.me.crafting.CraftConfirmTableRenderer;
 import appeng.client.gui.style.ScreenStyle;
 import appeng.client.gui.widgets.AETextField;
 import appeng.client.gui.widgets.SettingToggleButton;
@@ -12,15 +14,21 @@ import appeng.core.localization.GuiText;
 import appeng.menu.me.crafting.CraftConfirmMenu;
 import appeng.menu.me.crafting.CraftingPlanSummary;
 import appeng.menu.me.crafting.CraftingPlanSummaryEntry;
+import lu.kolja.expandedae.client.gui.widgets.ExpActionButton;
+import lu.kolja.expandedae.client.gui.widgets.ExpActionItems;
 import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.helper.cpu.ISearchScreen;
 import lu.kolja.expandedae.helper.cpu.TableEntrySorters;
 import lu.kolja.expandedae.helper.misc.NumberUtil;
+import lu.kolja.expandedae.xmod.recipemanager.RecipeManager;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import org.apache.commons.lang3.StringUtils;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,12 +41,15 @@ import java.util.List;
 
 @Mixin(value = CraftConfirmScreen.class, remap = false)
 public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> implements ISearchScreen {
+    @Shadow @Final private CraftConfirmTableRenderer table;
     @Unique
     private AETextField eae$searchField;
     @Unique
     private SettingToggleButton<SortOrder> eae$sortByToggle;
     @Unique
     private SettingToggleButton<SortDir> eae$sortDirToggle;
+    @Unique
+    private Button eae$addMissing;
 
     private MixinCraftConfirmScreen(CraftConfirmMenu menu, Inventory playerInventory, Component title, ScreenStyle style) {
         super(menu, playerInventory, title, style);
@@ -54,6 +65,17 @@ public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> impl
 
         this.eae$sortByToggle = this.addToLeftToolbar(new SettingToggleButton<>(Settings.SORT_BY, SortOrder.AMOUNT, ISearchScreen::eae$toggleButton));
         this.eae$sortDirToggle = this.addToLeftToolbar(new SettingToggleButton<>(Settings.SORT_DIRECTION, SortDir.ASCENDING, ISearchScreen::eae$toggleButton));
+        this.eae$addMissing = this.addToLeftToolbar(new ExpActionButton(ExpActionItems.ADD_MISSING, this::eae$addMissing));
+
+    }
+
+    @Inject(
+            method = "updateBeforeRender",
+            at = @At("TAIL")
+    )
+    private void updateBeforeRender(CallbackInfo ci) {
+        if (this.menu.getPlan() == null) return;
+        this.eae$addMissing.visible = this.menu.getPlan().getEntries().stream().anyMatch(e -> e.getMissingAmount() > 0);
     }
 
     /**
@@ -133,5 +155,21 @@ public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> impl
     )
     private MutableComponent eae$modifyText(GuiText instance, Object[] objects) {
         return ExpLang.BYTES_USED.text(objects);
+    }
+
+    @Unique
+    private void eae$addMissing() {
+        var plan = menu.getPlan();
+        if (plan == null || RecipeManager.INSTANCE == null) return;
+        plan.getEntries().stream().filter(e -> e.getMissingAmount() > 0).forEach(
+                c -> RecipeManager.INSTANCE.addFavorites(new GenericStack(c.getWhat(), c.getWhat().getAmountPerOperation()))
+        );
+        RecipeManager.INSTANCE.addFavorites(
+                plan.getEntries()
+                        .stream()
+                        .filter(e -> e.getMissingAmount() > 0)
+                        .map(e -> new GenericStack(e.getWhat(), e.getWhat().getAmountPerOperation()))
+                        .toArray(GenericStack[]::new)
+        );
     }
 }
