@@ -25,6 +25,8 @@ public enum ExpLang implements LocalizationEnum {
     GUI_TOOLTIPS_MODIFY_PATTERNS_HINT("gui.tooltips.expandedae.modifyPatternsHint", "Left click to multiply, right click to divide \nMultipliers: Shift 2x, Ctrl 8x"),
     GUI_TOOLTIPS_MODIFY_PATTERNS_GT("gui.tooltips.expandedae.modifyPatternsGT", "Left click to multiply, right click to divide"),
     GUI_TOOLTIPS_MODIFY_PATTERNS_HINT_GT("gui.tooltips.expandedae.modifyPatternsHintGT", "Multipliers: Shift 2x, Ctrl 8x"),
+    GUI_TOOLTIPS_ADD_MISSING("gui.tooltips.expandedae.addMissing", "Bookmark"),
+    GUI_TOOLTIPS_ADD_MISSING_HINT("gui.tooltips.expandedae.addMissingHint", "Bookmark all missing stacks to your recipe manager"),
 
     GUI_BUTTONS_PATTERN_DIV("gui.buttons.pattern.div", "§c÷%d§f"),
     GUI_BUTTONS_PATTERN_MULT("gui.buttons.pattern.mult", "§bx%d§f"),
@@ -62,7 +64,14 @@ public enum ExpLang implements LocalizationEnum {
     CURRENT("text.expandedae.card", "Current: %s"),
 
     SWITCH_PAGE("gui.expandedae.switch_page", "%s Page"),
-    SWITCH_PAGE_HINT("gui.expandedae.switch_page.hint", "Click to go to the %s page");
+    SWITCH_PAGE_HINT("gui.expandedae.switch_page.hint", "Click to go to the %s page"),
+
+    BOUND_TO("msg.expandedae.bound_to", "Bound to %s"),
+    SHIFT_INFO("gui.expandedae.shift_info", "§7Press §o[SHIFT] §r§7for more info"),
+    LINKED_TERM_HINT("gui.expandedae.linked_terminal.hint", "§c§lNote: This will only pull blocks from your ME network, not your inventory"),
+
+    HIGHLIGHTED_BLOCK("msg.expandedae.highlighted", "Highlighted block at %s §rin %s"),
+    HIGHLIGHT("gui.expandedae.highlight", "Shift-Click to highlight");
 
     private final String key;
     private final String text;
