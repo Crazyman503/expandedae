@@ -19,6 +19,7 @@ import lu.kolja.expandedae.definition.ExpItems;
 import lu.kolja.expandedae.definition.ExpSettings;
 import lu.kolja.expandedae.enums.Addons;
 import lu.kolja.expandedae.enums.BlockingMode;
+import lu.kolja.expandedae.helper.patternprovider.IHighlightable;
 import lu.kolja.expandedae.helper.patternprovider.IPatternProviderLogic;
 import lu.kolja.expandedae.helper.patternprovider.PatternProviderTargetCache;
 import lu.kolja.expandedae.mixin.accessor.AccessorCraftingCpuLogic;
@@ -42,7 +43,7 @@ import java.util.List;
 import java.util.Set;
 
 @Mixin(value = PatternProviderLogic.class, remap = false, priority = 1001)
-public abstract class MixinPatternProviderLogic implements IUpgradeableObject, IPatternProviderLogic {
+public abstract class MixinPatternProviderLogic implements IUpgradeableObject, IPatternProviderLogic, IHighlightable {
     @Unique
     private static final boolean AAE_LOADED = Addons.ADV.isLoaded;
 
@@ -202,5 +203,10 @@ public abstract class MixinPatternProviderLogic implements IUpgradeableObject, I
             result.add(input.getPossibleInputs()[0].what());
         }
         return result;
+    }
+
+    @Override
+    public BlockEntity eae$getBlockPos() {
+        return this.host.getBlockEntity();
     }
 }

@@ -5,6 +5,7 @@ import appeng.api.config.SortDir;
 import appeng.api.config.SortOrder;
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.me.crafting.CraftingCPUScreen;
+import appeng.client.gui.me.crafting.CraftingStatusTableRenderer;
 import appeng.client.gui.style.ScreenStyle;
 import appeng.client.gui.widgets.AETextField;
 import appeng.client.gui.widgets.SettingToggleButton;
@@ -15,10 +16,14 @@ import appeng.menu.me.crafting.CraftingStatusEntry;
 import com.google.common.collect.ImmutableList;
 import lu.kolja.expandedae.helper.cpu.ISearchScreen;
 import lu.kolja.expandedae.helper.cpu.TableEntrySorters;
+import lu.kolja.expandedae.network.ExpNetworkHandler;
+import lu.kolja.expandedae.network.implementations.HighlightDataPacket;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import org.apache.commons.lang3.StringUtils;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -42,6 +47,7 @@ public abstract class MixinCraftingCPUScreen<T extends CraftingCPUMenu> extends 
     @Shadow public abstract void postUpdate(CraftingStatus status);
 
     @Shadow private CraftingStatus status;
+    @Shadow @Final private CraftingStatusTableRenderer table;
     @Unique
     private AETextField eae$searchField;
 
@@ -132,6 +138,14 @@ public abstract class MixinCraftingCPUScreen<T extends CraftingCPUMenu> extends 
     public boolean mouseClicked(double xCoord, double yCoord, int btn) {
         if (this.eae$searchField.isMouseOver(xCoord, yCoord) && btn == 1) {
             eae$clearSearch();
+        }
+        if (btn == 0 && Screen.hasShiftDown()) {
+            var hovered = table.getHoveredStack();
+            if (hovered != null) {
+                var packet = new HighlightDataPacket.HighlightWhat(hovered.stack().what());
+                ExpNetworkHandler.HANDLER.sendToServer(packet);
+                return true;
+            }
         }
         return super.mouseClicked(xCoord, yCoord, btn);
     }

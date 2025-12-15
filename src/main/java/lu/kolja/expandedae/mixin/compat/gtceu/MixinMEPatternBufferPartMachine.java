@@ -16,7 +16,9 @@ import com.lowdragmc.lowdraglib.gui.texture.GuiTextureGroup;
 import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.helper.misc.KeybindUtil;
 import lu.kolja.expandedae.helper.misc.PatternHelper;
+import lu.kolja.expandedae.helper.patternprovider.IHighlightable;
 import lu.kolja.expandedae.xmod.gtceu.ExpGtceu;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(value = MEPatternBufferPartMachine.class, remap = false)
-public abstract class MixinMEPatternBufferPartMachine extends MEBusPartMachine implements ICraftingProvider, PatternContainer, IDataStickInteractable {
+public abstract class MixinMEPatternBufferPartMachine extends MEBusPartMachine implements ICraftingProvider, PatternContainer, IDataStickInteractable, IHighlightable {
 
     public MixinMEPatternBufferPartMachine(IMachineBlockEntity holder, IO io, Object... args) {
         super(holder, io, args);
@@ -60,5 +62,10 @@ public abstract class MixinMEPatternBufferPartMachine extends MEBusPartMachine i
                         ExpLang.GUI_TOOLTIPS_MODIFY_PATTERNS_HINT_GT.text()
                 ))
         );
+    }
+
+    @Override
+    public BlockEntity eae$getBlockPos() {
+        return this.getLevel().getBlockEntity(this.getPos());
     }
 }
