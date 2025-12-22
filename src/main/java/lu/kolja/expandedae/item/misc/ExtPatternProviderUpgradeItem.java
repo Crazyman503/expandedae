@@ -1,7 +1,7 @@
 package lu.kolja.expandedae.item.misc;
 
-import appeng.blockentity.crafting.PatternProviderBlockEntity;
-import appeng.core.definitions.AEParts;
+import com.glodblock.github.extendedae.common.EPPItemAndBlock;
+import com.glodblock.github.extendedae.common.tileentities.TileExPatternProvider;
 import lu.kolja.expandedae.definition.ExpBlockEntities;
 import lu.kolja.expandedae.definition.ExpBlocks;
 import lu.kolja.expandedae.definition.ExpItems;
@@ -18,14 +18,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ExpPatternProviderUpgradeItem extends UpgradeItem {
-    public ExpPatternProviderUpgradeItem(Properties pProperties) {
+public class ExtPatternProviderUpgradeItem extends UpgradeItem {
+    public ExtPatternProviderUpgradeItem(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag advancedTooltips) {
-        tooltip.add(ExpLang.ITEM_UPGRADE_TOOLTIP.text("a Pattern Provider to an Expanded Pattern Provider")
+        tooltip.add(ExpLang.ITEM_UPGRADE_TOOLTIP.text("an Extended Pattern Provider to an Expanded Pattern Provider")
                 .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, level, tooltip, advancedTooltips);
     }
@@ -33,7 +33,7 @@ public class ExpPatternProviderUpgradeItem extends UpgradeItem {
     @Override
     public @NotNull InteractionResult useOn(@NotNull UseOnContext context) {
         return replace(context,
-                PatternProviderBlockEntity.class, ExpBlockEntities.EXP_PATTERN_PROVIDER, ExpBlocks.EXP_PATTERN_PROVIDER,
-                AEParts.PATTERN_PROVIDER.asItem().getPartClass(), ExpItems.EXP_PATTERN_PROVIDER_PART.asItem());
+                TileExPatternProvider.class, ExpBlockEntities.EXP_PATTERN_PROVIDER, ExpBlocks.EXP_PATTERN_PROVIDER,
+                EPPItemAndBlock.EX_PATTERN_PROVIDER_PART.getPartClass(), ExpItems.EXP_PATTERN_PROVIDER_PART.asItem());
     }
 }

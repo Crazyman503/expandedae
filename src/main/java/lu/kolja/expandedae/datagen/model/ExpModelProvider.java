@@ -9,15 +9,12 @@ import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.definition.ExpBlocks;
 import lu.kolja.expandedae.enums.ExpTiers;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-
-import static lu.kolja.expandedae.definition.ExpItems.*;
 
 public class ExpModelProvider extends AE2BlockStateProvider {
     public ExpModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -26,12 +23,6 @@ public class ExpModelProvider extends AE2BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        // General
-        basicItem(EXP_PATTERN_PROVIDER_UPGRADE);
-        // CARDS
-        basicItem(AUTO_COMPLETE_CARD);
-        basicItem(PATTERN_REFILLER_CARD);
-        basicItem(GREATER_ACCEL_CARD);
         energyCell(ExpBlocks.EXP_ENERGY_CELL, "block/exp_energy_cell");
         // CPU
         for (var cpu : ExpTiers.values()) {
@@ -48,10 +39,6 @@ public class ExpModelProvider extends AE2BlockStateProvider {
             simpleBlockItem(block, model);
         }
 
-    }
-
-    private void basicItem(ItemLike item) {
-        itemModels().basicItem(item.asItem());
     }
 
     @NotNull

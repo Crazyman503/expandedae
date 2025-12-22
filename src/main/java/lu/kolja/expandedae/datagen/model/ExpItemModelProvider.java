@@ -11,6 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import static lu.kolja.expandedae.definition.ExpItems.*;
+import static lu.kolja.expandedae.definition.ExpItems.GREATER_ACCEL_CARD;
+
 public class ExpItemModelProvider extends ItemModelProvider {
     public ExpItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, Expandedae.MODID, existingFileHelper);
@@ -24,6 +27,15 @@ public class ExpItemModelProvider extends ItemModelProvider {
         for (var cell : ExpCellModels.cellModels.object2ObjectEntrySet()) {
             driveCell(cell.getValue());
         }
+
+        // General
+        basicItem(EXP_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(MEGA_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(EXT_PATTERN_PROVIDER_UPGRADE.asItem());
+        // CARDS
+        basicItem(AUTO_COMPLETE_CARD.asItem());
+        basicItem(PATTERN_REFILLER_CARD.asItem());
+        basicItem(GREATER_ACCEL_CARD.asItem());
         basicItem(ExpItems.DUAL_CELL_HOUSING.asItem());
         basicItem(MegaCells.DUAL_CELL_MEGA_HOUSING.asItem());
         basicItem(ExpItems.PRIORITY_CARD.asItem());

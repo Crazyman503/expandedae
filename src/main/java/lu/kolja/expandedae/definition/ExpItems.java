@@ -19,6 +19,8 @@ import lu.kolja.expandedae.cell.dual.DualStorageCell;
 import lu.kolja.expandedae.enums.Addons;
 import lu.kolja.expandedae.item.misc.ExpPatternProviderUpgradeItem;
 import lu.kolja.expandedae.item.linked.LinkedTerminalItem;
+import lu.kolja.expandedae.item.misc.ExtPatternProviderUpgradeItem;
+import lu.kolja.expandedae.item.misc.MegaPatternProviderUpgradeItem;
 import lu.kolja.expandedae.item.misc.PriorityCardItem;
 import lu.kolja.expandedae.item.part.ExpPatternProviderPartItem;
 import lu.kolja.expandedae.part.ExpPatternProviderPart;
@@ -55,6 +57,16 @@ public class ExpItems {
             "Expanded Pattern Provider Upgrade",
             "exp_pattern_provider_upgrade",
             ExpPatternProviderUpgradeItem::new
+    );
+    public static final ItemDefinition<MegaPatternProviderUpgradeItem> MEGA_PATTERN_PROVIDER_UPGRADE = item(
+            "Mega Pattern Provider Upgrade",
+            "mega_pattern_provider_upgrade",
+            MegaPatternProviderUpgradeItem::new
+    );
+    public static final ItemDefinition<ExtPatternProviderUpgradeItem> EXT_PATTERN_PROVIDER_UPGRADE = item(
+            "Extended Pattern Provider Upgrade",
+            "ext_pattern_provider_upgrade",
+            ExtPatternProviderUpgradeItem::new
     );
 
     public static final ItemDefinition<UpgradeCardItem> AUTO_COMPLETE_CARD = item(

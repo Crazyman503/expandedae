@@ -65,6 +65,29 @@ public class ExpRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
                 .unlockedBy("has_capacity_card", has(CAPACITY_CARD))
                 .save(out, craftingId("exp_pattern_provider_upgrade"));
+        conditional(
+                ShapedRecipeBuilder.shaped(MISC, MEGA_PATTERN_PROVIDER_UPGRADE)
+                        .pattern("EC")
+                        .pattern("CE")
+                        .define('C', CAPACITY_CARD)
+                        .define('E', ENGINEERING_PROCESSOR)
+                        .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
+                        .unlockedBy("has_capacity_card", has(CAPACITY_CARD)),
+                out, loaded(MEGA.mod),
+                craftingId("mega_pattern_provider_upgrade")
+        );
+
+        conditional(
+                ShapedRecipeBuilder.shaped(MISC, EXT_PATTERN_PROVIDER_UPGRADE)
+                        .pattern("ECE")
+                        .pattern("CEC")
+                        .define('C', CAPACITY_CARD)
+                        .define('E', ENGINEERING_PROCESSOR)
+                        .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
+                        .unlockedBy("has_capacity_card", has(CAPACITY_CARD)),
+                out, loaded(EXT.mod),
+                craftingId("ext_pattern_provider_upgrade")
+        );
 
         ShapelessRecipeBuilder.shapeless(MISC, AUTO_COMPLETE_CARD)
                 .requires(ADVANCED_CARD)
@@ -237,8 +260,8 @@ public class ExpRecipeProvider extends RecipeProvider {
         recipe.save(finished ->
                 ConditionalRecipe
                         .builder()
-                        .addRecipe(finished)
                         .addCondition(condition)
+                        .addRecipe(finished)
                         .build(out, id));
     }
 

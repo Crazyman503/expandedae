@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "megacells"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "C": {
+            "item": "ae2:capacity_card"
+          },
+          "E": {
+            "item": "ae2:engineering_processor"
+          }
+        },
+        "pattern": [
+          "EC",
+          "CE"
+        ],
+        "result": {
+          "item": "expandedae:mega_pattern_provider_upgrade"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
