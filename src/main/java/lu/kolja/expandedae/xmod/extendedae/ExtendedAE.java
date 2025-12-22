@@ -1,12 +1,20 @@
 package lu.kolja.expandedae.xmod.extendedae;
 
 import appeng.api.upgrades.Upgrades;
+import appeng.core.definitions.ItemDefinition;
 import com.glodblock.github.extendedae.common.EPPItemAndBlock;
 import com.glodblock.github.extendedae.common.items.ItemMEPackingTape;
 import lu.kolja.expandedae.definition.ExpBlocks;
 import lu.kolja.expandedae.definition.ExpItems;
+import lu.kolja.expandedae.item.misc.ExtPatternProviderUpgradeItem;
 
 public class ExtendedAE {
+    public static ItemDefinition<ExtPatternProviderUpgradeItem> EXT_PATTERN_PROVIDER_UPGRADE;
+
+    public static void initItems() {
+        EXT_PATTERN_PROVIDER_UPGRADE = ExpItems.item("Extended Pattern Provider Upgrade", "ext_pattern_provider_upgrade", ExtPatternProviderUpgradeItem::new);
+    }
+
     public ExtendedAE() {
         ItemMEPackingTape.registerPackableDevice(ExpBlocks.EXP_PATTERN_PROVIDER.id());
         ItemMEPackingTape.registerPackableDevice(ExpItems.EXP_PATTERN_PROVIDER_PART.id());

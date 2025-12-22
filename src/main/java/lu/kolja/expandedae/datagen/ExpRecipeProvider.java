@@ -10,6 +10,7 @@ import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.datagen.conditionals.ModNotLoadedCondition;
 import lu.kolja.expandedae.definition.ExpItems;
 import lu.kolja.expandedae.enums.ExpTiers;
+import lu.kolja.expandedae.xmod.extendedae.ExtendedAE;
 import lu.kolja.expandedae.xmod.megacells.MegaCells;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -66,7 +67,7 @@ public class ExpRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_capacity_card", has(CAPACITY_CARD))
                 .save(out, craftingId("exp_pattern_provider_upgrade"));
         conditional(
-                ShapedRecipeBuilder.shaped(MISC, MEGA_PATTERN_PROVIDER_UPGRADE)
+                ShapedRecipeBuilder.shaped(MISC, MegaCells.MEGA_PATTERN_PROVIDER_UPGRADE)
                         .pattern("EC")
                         .pattern("CE")
                         .define('C', CAPACITY_CARD)
@@ -78,7 +79,7 @@ public class ExpRecipeProvider extends RecipeProvider {
         );
 
         conditional(
-                ShapedRecipeBuilder.shaped(MISC, EXT_PATTERN_PROVIDER_UPGRADE)
+                ShapedRecipeBuilder.shaped(MISC, ExtendedAE.EXT_PATTERN_PROVIDER_UPGRADE)
                         .pattern("ECE")
                         .pattern("CEC")
                         .define('C', CAPACITY_CARD)

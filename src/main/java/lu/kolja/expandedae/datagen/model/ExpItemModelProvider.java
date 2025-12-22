@@ -5,6 +5,7 @@ import appeng.core.definitions.ItemDefinition;
 import lu.kolja.expandedae.Expandedae;
 import lu.kolja.expandedae.client.ExpCellModels;
 import lu.kolja.expandedae.definition.ExpItems;
+import lu.kolja.expandedae.xmod.extendedae.ExtendedAE;
 import lu.kolja.expandedae.xmod.megacells.MegaCells;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -30,8 +31,8 @@ public class ExpItemModelProvider extends ItemModelProvider {
 
         // General
         basicItem(EXP_PATTERN_PROVIDER_UPGRADE.asItem());
-        basicItem(MEGA_PATTERN_PROVIDER_UPGRADE.asItem());
-        basicItem(EXT_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(MegaCells.MEGA_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(ExtendedAE.EXT_PATTERN_PROVIDER_UPGRADE.asItem());
         // CARDS
         basicItem(AUTO_COMPLETE_CARD.asItem());
         basicItem(PATTERN_REFILLER_CARD.asItem());
