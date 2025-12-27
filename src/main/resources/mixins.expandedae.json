@@ -10,6 +10,7 @@
     "accessor.AccessorExecutingCraftingJob",
     "accessor.AccessorExecutingCraftingJob$AccessorTaskProgress",
     "accessor.AccessorIOPortBlockEntity",
+    "accessor.AccessorScreenStyle",
     "compat.advancedae.AAEAccessorAdvCraftingCPULogic",
     "compat.advancedae.AAEAccessorExecutingCraftingJob",
     "compat.advancedae.AAEAccessorExecutingCraftingJob$AAEAccessorTaskProgress",

@@ -6,6 +6,8 @@ import appeng.client.gui.style.ScreenStyle;
 import appeng.menu.me.crafting.CraftingStatusMenu;
 import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.helper.misc.ICancellable;
+import lu.kolja.expandedae.helper.misc.GuardedWidget;
+import lu.kolja.expandedae.mixin.accessor.AccessorScreenStyle;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
@@ -23,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 @Mixin(value = CraftingStatusScreen.class, remap = false)
 public class MixinCraftingStatusScreen extends CraftingCPUScreen<CraftingStatusMenu> {
     @Unique
-    private Button expandedae$cancelAll;
+    private GuardedWidget<Button> expandedae$cancelAll;
 
     @Unique
     private boolean eae$confirmCancel = false;
@@ -38,12 +40,12 @@ public class MixinCraftingStatusScreen extends CraftingCPUScreen<CraftingStatusM
             remap = false
     )
     private void init(CraftingStatusMenu menu, Inventory playerInventory, Component title, ScreenStyle style, CallbackInfo ci) {
-        this.expandedae$cancelAll = this.widgets.addButton(
-                "cancelAll",
+        this.expandedae$cancelAll = GuardedWidget.guardedWidget("cancelAll", ((AccessorScreenStyle) style).getWidgets(),
+                id -> this.widgets.addButton(
+                id,
                 ExpLang.CANCEL_ALL.text(),
                 this::eae$confirmCancel
-        );
-        this.expandedae$cancelAll.setTooltip(Tooltip.create(ExpLang.CANCEL_ALL_HINT.text()));
+        )).runIfPresent(w -> w.setTooltip(Tooltip.create(ExpLang.CANCEL_ALL_HINT.text())));
     }
     /**
      * Reset the cancel all button to its default state
@@ -51,8 +53,8 @@ public class MixinCraftingStatusScreen extends CraftingCPUScreen<CraftingStatusM
     @Unique
     private Runnable eae$reset = () -> {
         this.eae$confirmCancel = false;
-        this.expandedae$cancelAll.setMessage(ExpLang.CANCEL_ALL.text());
-        this.expandedae$cancelAll.setTooltip(Tooltip.create(ExpLang.CANCEL_ALL_HINT.text()));
+        this.expandedae$cancelAll.widget().setMessage(ExpLang.CANCEL_ALL.text());
+        this.expandedae$cancelAll.widget().setTooltip(Tooltip.create(ExpLang.CANCEL_ALL_HINT.text()));
     };
 
     /**
@@ -65,8 +67,8 @@ public class MixinCraftingStatusScreen extends CraftingCPUScreen<CraftingStatusM
             ((ICancellable) menu).expandedae$cancelAll();
             eae$reset.run();
         } else {
-            this.expandedae$cancelAll.setMessage(ExpLang.CANCEL_CONFIRM.text());
-            this.expandedae$cancelAll.setTooltip(Tooltip.create(ExpLang.CANCEL_CONFIRM_HINT.text()));
+            this.expandedae$cancelAll.widget().setMessage(ExpLang.CANCEL_CONFIRM.text());
+            this.expandedae$cancelAll.widget().setTooltip(Tooltip.create(ExpLang.CANCEL_CONFIRM_HINT.text()));
             this.eae$confirmCancel = true;
             CompletableFuture.runAsync(eae$reset, CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS));
         }
@@ -77,7 +79,7 @@ public class MixinCraftingStatusScreen extends CraftingCPUScreen<CraftingStatusM
      */
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float btn) {
-        this.expandedae$cancelAll.active = menu.cpuList.cpus().stream().anyMatch(cpu -> cpu.currentJob() != null);
+        this.expandedae$cancelAll.runIfPresent(w -> w.active = menu.cpuList.cpus().stream().anyMatch(cpu -> cpu.currentJob() != null));
         super.render(guiGraphics, mouseX, mouseY, btn);
     }
 }

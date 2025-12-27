@@ -6,7 +6,6 @@ import appeng.api.config.SortOrder;
 import appeng.api.stacks.GenericStack;
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.me.crafting.CraftConfirmScreen;
-import appeng.client.gui.me.crafting.CraftConfirmTableRenderer;
 import appeng.client.gui.style.ScreenStyle;
 import appeng.client.gui.widgets.AETextField;
 import appeng.client.gui.widgets.SettingToggleButton;
@@ -19,16 +18,16 @@ import lu.kolja.expandedae.client.gui.widgets.ExpActionItems;
 import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.helper.cpu.ISearchScreen;
 import lu.kolja.expandedae.helper.cpu.TableEntrySorters;
+import lu.kolja.expandedae.helper.misc.GuardedWidget;
 import lu.kolja.expandedae.helper.misc.NumberUtil;
+import lu.kolja.expandedae.mixin.accessor.AccessorScreenStyle;
 import lu.kolja.expandedae.xmod.recipemanager.RecipeManager;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import org.apache.commons.lang3.StringUtils;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -41,9 +40,8 @@ import java.util.List;
 
 @Mixin(value = CraftConfirmScreen.class, remap = false)
 public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> implements ISearchScreen {
-    @Shadow @Final private CraftConfirmTableRenderer table;
     @Unique
-    private AETextField eae$searchField;
+    private GuardedWidget<AETextField> eae$searchField;
     @Unique
     private SettingToggleButton<SortOrder> eae$sortByToggle;
     @Unique
@@ -60,13 +58,13 @@ public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> impl
             at = @At("TAIL")
     )
     private void init(CraftConfirmMenu menu, Inventory playerInventory, Component title, ScreenStyle style, CallbackInfo ci) {
-        this.eae$searchField = this.widgets.addTextField("searchField");
-        this.eae$searchField.setPlaceholder(GuiText.SearchPlaceholder.text());
+        this.eae$searchField = GuardedWidget
+                .guardedWidget("searchField", ((AccessorScreenStyle) style).getWidgets(), this.widgets::addTextField)
+                .runIfPresent(w -> w.setPlaceholder(GuiText.SearchPlaceholder.text()));
 
         this.eae$sortByToggle = this.addToLeftToolbar(new SettingToggleButton<>(Settings.SORT_BY, SortOrder.AMOUNT, ISearchScreen::eae$toggleButton));
         this.eae$sortDirToggle = this.addToLeftToolbar(new SettingToggleButton<>(Settings.SORT_DIRECTION, SortDir.ASCENDING, ISearchScreen::eae$toggleButton));
         this.eae$addMissing = this.addToLeftToolbar(new ExpActionButton(ExpActionItems.ADD_MISSING, this::eae$addMissing));
-
     }
 
     @Inject(
@@ -89,7 +87,7 @@ public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> impl
             )
     )
     public List<CraftingPlanSummaryEntry> eae$getEntries(CraftingPlanSummary instance) {
-        return eae$filterEntries(new ArrayList<>(instance.getEntries()));
+        return this.eae$searchField.isPresent() ? eae$filterEntries(new ArrayList<>(instance.getEntries())) : instance.getEntries();
     }
 
     /**
@@ -97,7 +95,7 @@ public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> impl
      */
     @Unique
     private List<CraftingPlanSummaryEntry> eae$filterEntries(List<CraftingPlanSummaryEntry> entries) {
-        var search = this.eae$searchField.getValue();
+        var search = this.eae$searchField.widget().getValue();
         entries.sort(TableEntrySorters.Plan.getComparator(eae$getSortBy(), eae$getSortDir()));
         if (!search.isEmpty()) {
             entries.removeIf(
@@ -112,7 +110,8 @@ public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> impl
      */
     @Override
     public boolean mouseClicked(double xCoord, double yCoord, int btn) {
-        if (this.eae$searchField.isMouseOver(xCoord, yCoord) && btn == 1) this.eae$searchField.setValue("");
+        if (this.eae$searchField.isPresent() && this.eae$searchField.widget().isMouseOver(xCoord, yCoord) && btn == 1)
+            this.eae$searchField.widget().setValue("");
         return super.mouseClicked(xCoord, yCoord, btn);
     }
 
@@ -129,7 +128,7 @@ public class MixinCraftConfirmScreen extends AEBaseScreen<CraftConfirmMenu> impl
 
     @Override
     public void eae$clearSearch() {
-        this.eae$searchField.setValue("");
+        this.eae$searchField.runIfPresent(w -> w.setValue(""));
     }
 
     @Override
