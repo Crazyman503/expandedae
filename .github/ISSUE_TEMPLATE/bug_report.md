@@ -32,3 +32,5 @@ Add any other context about the problem here.
 
 **Logs**
 If applicable, please provide a log using [mclo.gs](https://mclo.gs/)
+
+*Note: Please make sure to fill out each section as thoroughly as possible, and if not applicable, delete that respective section, including this note.*
