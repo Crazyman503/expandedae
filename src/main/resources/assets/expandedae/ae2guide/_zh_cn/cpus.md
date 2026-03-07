@@ -1,7 +1,7 @@
 ---
 navigation:
   parent: expandedae-index.md
-  title: 拓充CPU
+  title: 拓展并行处理单元
   icon: exp_crafting_accelerator_1m
   position: 2
 categories:
@@ -15,6 +15,6 @@ item_ids:
   <IsometricCamera yaw="195" pitch="30" />
 </GameScene>
 
-## 你期待更快的合成速度吗？
-### 本模组添加了更大的（从2倍到*1**M**倍的*）[Crafting Co-Processing units](ae2:items-blocks-machines/crafting_cpu_multiblock.md)。
-### 同样地，我们添加了对应的基础合成单元来让CPU更美观。
+## 你也喜欢用更多的线程来加速合成处理吗？这还用问，谁不喜欢呢！
+### 本模组添加了更多[并行处理单元](ae2:items-blocks-machines/crafting_cpu_multiblock.md)，每个方块可提供从2倍到1M倍的额外线程。
+### 同时，还添加了一个对应的基础合成单元以保持风格统一！
