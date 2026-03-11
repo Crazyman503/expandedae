@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "expandedae:block/exp_pattern_provider"
+    "all": "expandedae:block/giga_pattern_provider"
   }
 }

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_giga_pattern_provider": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "expandedae:giga_pattern_provider"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "expandedae:crafting/giga_pattern_provider_part"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_giga_pattern_provider",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "expandedae:crafting/giga_pattern_provider_part"
+    ]
+  },
+  "sends_telemetry_event": false
+}

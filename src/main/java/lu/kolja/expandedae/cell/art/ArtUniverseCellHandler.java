@@ -14,9 +14,15 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
-import static appeng.core.localization.Tooltips.*;
+import static appeng.core.localization.Tooltips.NUMBER_TEXT;
+import static appeng.core.localization.Tooltips.colorFromRatio;
+import static appeng.core.localization.Tooltips.typesUsed;
 
 public class ArtUniverseCellHandler implements ICellHandler {
     public static final ArtUniverseCellHandler INSTANCE = new ArtUniverseCellHandler();

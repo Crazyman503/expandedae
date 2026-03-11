@@ -16,7 +16,6 @@
     "compat.advancedae.AAEAccessorExecutingCraftingJob$AAEAccessorTaskProgress",
     "compat.appflux.MixinPatternProviderLogicAppFlux",
     "compat.appflux.MixinPatternProviderMenuAppFlux",
-    "compat.gtceu.BlockPatternMixin",
     "compat.gtceu.MixinMEPatternBufferPartMachine",
     "cpu.MixinCPUSelectionList",
     "cpu.MixinCraftingCPUCluster",
@@ -32,6 +31,10 @@
     "patternprovider.MixinPatternProviderLogic",
     "patternprovider.MixinPatternProviderLogicHost",
     "patternprovider.MixinPatternProviderMenu",
+    "specific.MixinPatternProviderMenu",
+    "storage.MixinMEStorageMenu",
+    "storage.MixinStorageService",
+    "storage.MixinStorageService$AccessorProviderState",
     "terminal.MixinPatternEncodingTerminalMenu",
     "terminal.MixinProcessingEncodingPanel"
   ],
@@ -44,6 +47,7 @@
     "misc.MixinModelBakery",
     "misc.MixinSettingToggleButton",
     "patternprovider.MixinPatternProviderScreen",
+    "storage.MixinMEStorageScreen",
     "terminal.MixinPatternEncodingTermScreen"
   ],
   "injectors": {

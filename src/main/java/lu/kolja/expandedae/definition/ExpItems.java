@@ -17,11 +17,14 @@ import lu.kolja.expandedae.cell.art.ArtUniverseStorageCell;
 import lu.kolja.expandedae.cell.dual.AEKeyTypes;
 import lu.kolja.expandedae.cell.dual.DualStorageCell;
 import lu.kolja.expandedae.enums.Addons;
-import lu.kolja.expandedae.item.misc.ExpPatternProviderUpgradeItem;
-import lu.kolja.expandedae.item.linked.LinkedTerminalItem;
 import lu.kolja.expandedae.item.misc.PriorityCardItem;
 import lu.kolja.expandedae.item.part.ExpPatternProviderPartItem;
+import lu.kolja.expandedae.item.part.GigaPatternProviderPartItem;
+import lu.kolja.expandedae.item.upgrade.Exp2GigaUpgradeItem;
+import lu.kolja.expandedae.item.upgrade.P2ExpUpgradeItem;
+import lu.kolja.expandedae.item.upgrade.P2GigaUpgradeItem;
 import lu.kolja.expandedae.part.ExpPatternProviderPart;
+import lu.kolja.expandedae.part.GigaPatternProviderPart;
 import lu.kolja.expandedae.xmod.extendedae.ExtendedAE;
 import lu.kolja.expandedae.xmod.megacells.MegaCells;
 import net.minecraft.ChatFormatting;
@@ -29,7 +32,11 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -52,10 +59,25 @@ public class ExpItems {
         return item("Expanded Pattern Provider", "exp_pattern_provider_part", ExpPatternProviderPartItem::new);
     });
 
-    public static final ItemDefinition<ExpPatternProviderUpgradeItem> EXP_PATTERN_PROVIDER_UPGRADE = item(
+    public static final ItemDefinition<GigaPatternProviderPartItem> GIGA_PATTERN_PROVIDER_PART = Util.make(() -> {
+        PartModels.registerModels(PartModelsHelper.createModels(GigaPatternProviderPart.class));
+        return item("Giga Pattern Provider", "giga_pattern_provider_part", GigaPatternProviderPartItem::new);
+    });
+
+    public static final ItemDefinition<P2ExpUpgradeItem> EXP_PATTERN_PROVIDER_UPGRADE = item(
             "Expanded Pattern Provider Upgrade",
             "exp_pattern_provider_upgrade",
-            ExpPatternProviderUpgradeItem::new
+            P2ExpUpgradeItem::new
+    );
+    public static final ItemDefinition<P2GigaUpgradeItem> P2G_PATTERN_PROVIDER_UPGRADE = item(
+            "Giga Pattern Provider Upgrade",
+            "p2g_pattern_provider_upgrade",
+            P2GigaUpgradeItem::new
+    );
+    public static final ItemDefinition<Exp2GigaUpgradeItem> EXP2G_PATTERN_PROVIDER_UPGRADE = item(
+            "Expanded2Giga Pattern Provider Upgrade",
+            "exp2g_pattern_provider_upgrade",
+            Exp2GigaUpgradeItem::new
     );
 
     public static final ItemDefinition<UpgradeCardItem> AUTO_COMPLETE_CARD = item(
@@ -91,12 +113,6 @@ public class ExpItems {
                     super.appendHoverText(stack, level, tooltip, advancedTooltips);
                 }
             }
-    );
-
-    public static final ItemDefinition<LinkedTerminalItem> LINKED_TERMINAL = item(
-            "Linked Terminal",
-            "linked_terminal",
-            p -> new LinkedTerminalItem(p.stacksTo(1).rarity(Rarity.RARE))
     );
 
     public static final ItemDefinition<ArtUniverseStorageCell> ART_UNIVERSE_ITEM = item(
@@ -188,33 +204,6 @@ public class ExpItems {
         ITEMS.add(definition);
         return definition;
     }
-
-    /*
-    public static final ItemDefinition<FilterTerminalPartItem> FILTER_TERMINAL_PART = Util.make(() -> {
-        PartModels.registerModels(PartModelsHelper.createModels(FilterTerminalPart.class));
-        return item("Filter Terminal", "filter_terminal", FilterTerminalPartItem::new);
-    });
-    public static final ItemDefinition<ExtPatternProviderUpgradeItem> EXT_PATTERN_PROVIDER_UPGRADE = item(
-            "Extended Pattern Provider Upgrader",
-            "ext_pattern_provider_upgrader",
-            ExtPatternProviderUpgradeItem::new
-    );
-    public static final ItemDefinition<ItemAdvancedBlockingCard> ADVANCED_BLOCKING_CARD = item(
-            "Advanced Blocking Card",
-            "advanced_blocking_card",
-            ItemAdvancedBlockingCard::new
-    );
-    public static final ItemDefinition<ItemSmartBlockingCard> SMART_BLOCKING_CARD = item(
-            "Smart Blocking Card",
-            "smart_blocking_card",
-            ItemSmartBlockingCard::new
-    );
-    public static final ItemDefinition<ItemStickyCard> STICKY_CARD = item(
-            "Sticky Card",
-            "sticky_card",
-            ItemStickyCard::new
-    );
-    */
 
     static {
         if (Addons.MEGA.isLoaded) MegaCells.initItems();

@@ -7,10 +7,12 @@ import gripe._90.megacells.definition.MEGABlocks;
 import gripe._90.megacells.definition.MEGAItems;
 import lu.kolja.expandedae.cell.dual.DualStorageCell;
 import lu.kolja.expandedae.definition.ExpItems;
-import lu.kolja.expandedae.item.misc.MegaPatternProviderUpgradeItem;
+import lu.kolja.expandedae.item.upgrade.Mega2ExpUpgradeItem;
+import lu.kolja.expandedae.item.upgrade.Mega2GigaUpgradeItem;
 
 public class MegaCells {
-    public static ItemDefinition<MegaPatternProviderUpgradeItem> MEGA_PATTERN_PROVIDER_UPGRADE;
+    public static ItemDefinition<Mega2ExpUpgradeItem> MEGA_PATTERN_PROVIDER_UPGRADE;
+    public static ItemDefinition<Mega2GigaUpgradeItem> M2G_PATTERN_PROVIDER_UPGRADE;
 
     public MegaCells() {
         Upgrades.add(ExpItems.AUTO_COMPLETE_CARD, MEGABlocks.MEGA_PATTERN_PROVIDER.asItem(), 1, "group.mega_pattern_provider.name");
@@ -24,7 +26,8 @@ public class MegaCells {
     public static ItemDefinition<MaterialItem> DUAL_CELL_MEGA_HOUSING;
 
     public static void initItems() {
-        MEGA_PATTERN_PROVIDER_UPGRADE = ExpItems.item("Mega Pattern Provider Upgrade", "mega_pattern_provider_upgrade", MegaPatternProviderUpgradeItem::new);
+        MEGA_PATTERN_PROVIDER_UPGRADE = ExpItems.item("Mega Pattern Provider Upgrade", "mega_pattern_provider_upgrade", Mega2ExpUpgradeItem::new);
+        M2G_PATTERN_PROVIDER_UPGRADE = ExpItems.item("Mega2Giga Pattern Provider Upgrade", "m2g_pattern_provider_upgrade", Mega2GigaUpgradeItem::new);
         DUAL_CELL_MEGA_HOUSING = ExpItems.item("ME MEGA Dual Cell Housing", "mega_dual_cell_housing", MaterialItem::new);
 
         DUAL_1M = ExpItems.dualCell("1m",

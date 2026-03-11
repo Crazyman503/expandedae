@@ -16,8 +16,10 @@ public enum ExpLang implements LocalizationEnum {
     ITEM_UPGRADE_TOOLTIP("item.expandedae.upgrade.tooltip", "Upgrade %s"),
 
     GUI_EXP_PATTERN_PROVIDER("gui.expandedae.exp_pattern_provider", "Expanded Pattern Provider"),
+    GUI_GIGA_PATTERN_PROVIDER("gui.expandedae.giga_pattern_provider", "Giga Pattern Provider"),
     GUI_EXP_IO_PORT("gui.expandedae.exp_io_port", "Expanded IO Port"),
     GUI_FILTER_TERMINAL("gui.expandedae.filter_terminal", "Filter Terminal"),
+    GUI_BLOCKING_MODE("gui.expandedae.blocking_mode", "Blocking Mode - %s"),
     GUI_BLOCKING_MODE_ALL("gui.expandedae.blocking_mode.all", "Blocks if target contains anything"),
     GUI_BLOCKING_MODE_DEFAULT("gui.expandedae.blocking_mode.default", "Default blocking mode"),
     GUI_BLOCKING_MODE_SMART("gui.expandedae.blocking_mode.smart", "Allows same pattern to be pushed"),
@@ -39,6 +41,7 @@ public enum ExpLang implements LocalizationEnum {
     GROUP_EXP_IO_PORT_NAME("group.exp_io_port.name", "ME Expanded IO Port"),
     GROUP_MEGA_PATTERN_PROVIDER_NAME("group.mega_pattern_provider.name", "ME MEGA Pattern Provider"),
     GROUP_PATTERN_PROVIDER_NAME("group.pattern_provider.name", "ME Pattern Provider"),
+    GROUP_GIGA_PATTERN_PROVIDER_NAME("group.giga_pattern_provider.name", "ME Giga Pattern Provider"),
     GROUP_INTERFACE_NAME("group.interface.name", "ME Interface"),
     GROUP_STORAGE_BUS_NAME("group.storage_bus.name", "ME Storage Bus"),
     GROUP_EX_INTERFACE_NAME("group.ex_interface.name", "ME Extended Interface"),
@@ -66,12 +69,17 @@ public enum ExpLang implements LocalizationEnum {
     SWITCH_PAGE("gui.expandedae.switch_page", "%s Page"),
     SWITCH_PAGE_HINT("gui.expandedae.switch_page.hint", "Click to go to the %s page"),
 
-    BOUND_TO("msg.expandedae.bound_to", "Bound to %s"),
     SHIFT_INFO("gui.expandedae.shift_info", "§7Press §o[SHIFT] §r§7for more info"),
-    LINKED_TERM_HINT("gui.expandedae.linked_terminal.hint", "§c§lNote: This will only pull blocks from your ME network, not your inventory"),
 
     HIGHLIGHTED_BLOCK("msg.expandedae.highlighted", "Highlighted block at %s §rin %s"),
-    HIGHLIGHT("gui.expandedae.highlight", "Shift-Click to highlight");
+    HIGHLIGHTING_STORAGE("msg.expandedae.highlighting_blocks", "Highlighting storage locations for %s"),
+    HIGHLIGHTING_CRAFTS("msg.expandedae.highlighting_crafts", "Highlighting crafting locations for %s"),
+    HIGHLIGHT("gui.expandedae.highlight", "Shift-Click to highlight"),
+    NO_HIGHLIGHTED_BLOCKS("msg.expandedae.no_highlighted_blocks", "Found nothing to highlight"),
+
+    // Hotkeys
+    CATEGORY("key.categories.expandedae", "Expanded AE"),
+    KEY_HIGHLIGHT("key.expandedae.highlight", "Highlight Stored Locations");
 
     private final String key;
     private final String text;

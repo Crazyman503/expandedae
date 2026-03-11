@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "expandedae:item/linked_terminal"
+    "layer0": "expandedae:item/m2g_pattern_provider_upgrade"
   }
 }

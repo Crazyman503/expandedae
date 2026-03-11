@@ -9,6 +9,7 @@ import appeng.menu.SlotSemantics;
 import appeng.menu.ToolboxMenu;
 import appeng.menu.guisync.GuiSync;
 import appeng.menu.implementations.PatternProviderMenu;
+import lu.kolja.expandedae.definition.ExpSemantics;
 import lu.kolja.expandedae.definition.ExpSettings;
 import lu.kolja.expandedae.enums.BlockingMode;
 import lu.kolja.expandedae.helper.base.IUpgradableMenu;
@@ -60,6 +61,11 @@ public abstract class MixinPatternProviderMenu extends AEBaseMenu implements IUp
         else {
             for (var slot : this.getSlots(SlotSemantics.ENCODED_PATTERN)) {
                 slot.set(PatternHelper.modifyPatterns(slot.getItem(), mult, this.getPlayer().level()));
+            }
+            for (var semantic : ExpSemantics.ALL) {
+                for (var slot : this.getSlots(semantic)) {
+                    slot.set(PatternHelper.modifyPatterns(slot.getItem(), mult, this.getPlayer().level()));
+                }
             }
         }
     }

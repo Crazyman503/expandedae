@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "ae2:engineering_processor"
+    },
+    "P": {
+      "item": "expandedae:exp_pattern_provider"
+    }
+  },
+  "pattern": [
+    "EPE",
+    "P P",
+    "EPE"
+  ],
+  "result": {
+    "item": "expandedae:giga_pattern_provider"
+  },
+  "show_notification": true
+}

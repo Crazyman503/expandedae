@@ -6,13 +6,16 @@ import com.glodblock.github.extendedae.common.EPPItemAndBlock;
 import com.glodblock.github.extendedae.common.items.ItemMEPackingTape;
 import lu.kolja.expandedae.definition.ExpBlocks;
 import lu.kolja.expandedae.definition.ExpItems;
-import lu.kolja.expandedae.item.misc.ExtPatternProviderUpgradeItem;
+import lu.kolja.expandedae.item.upgrade.Ext2ExpUpgradeItem;
+import lu.kolja.expandedae.item.upgrade.Ext2GigaUpgradeItem;
 
 public class ExtendedAE {
-    public static ItemDefinition<ExtPatternProviderUpgradeItem> EXT_PATTERN_PROVIDER_UPGRADE;
+    public static ItemDefinition<Ext2ExpUpgradeItem> EXT_PATTERN_PROVIDER_UPGRADE;
+    public static ItemDefinition<Ext2GigaUpgradeItem> EXT2G_PATTERN_PROVIDER_UPGRADE;
 
     public static void initItems() {
-        EXT_PATTERN_PROVIDER_UPGRADE = ExpItems.item("Extended Pattern Provider Upgrade", "ext_pattern_provider_upgrade", ExtPatternProviderUpgradeItem::new);
+        EXT_PATTERN_PROVIDER_UPGRADE = ExpItems.item("Extended Pattern Provider Upgrade", "ext_pattern_provider_upgrade", Ext2ExpUpgradeItem::new);
+        EXT2G_PATTERN_PROVIDER_UPGRADE = ExpItems.item("Extended2Giga Pattern Provider Upgrade", "ext2g_pattern_provider_upgrade", Ext2GigaUpgradeItem::new);
     }
 
     public ExtendedAE() {

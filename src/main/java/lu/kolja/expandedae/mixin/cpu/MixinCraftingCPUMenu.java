@@ -5,6 +5,7 @@ import appeng.api.stacks.AEKey;
 import appeng.me.service.CraftingService;
 import appeng.menu.AEBaseMenu;
 import appeng.menu.me.crafting.CraftingCPUMenu;
+import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.helper.cpu.IHighlightMenu;
 import lu.kolja.expandedae.helper.patternprovider.IHighlightable;
 import lu.kolja.expandedae.highlight.BlockHighlightHandler;
@@ -54,7 +55,10 @@ public abstract class MixinCraftingCPUMenu extends AEBaseMenu implements IHighli
                     if (be != null) bePositions.add(be);
                 }
             }
-            if (!bePositions.isEmpty()) {
+            if (bePositions.isEmpty()) {
+                getPlayer().sendSystemMessage(ExpLang.NO_HIGHLIGHTED_BLOCKS.text());
+            } else {
+                this.getPlayer().sendSystemMessage(ExpLang.HIGHLIGHTING_CRAFTS.text(what.getDisplayName()));
                 for (var be : bePositions) {
                     var packet = new HighlightDataPacket(
                             be.getBlockPos(),

@@ -1,0 +1,10 @@
+{
+  "parent": "ae2:item/cable_pattern_provider",
+  "textures": {
+    "sides": "expandedae:part/giga_pattern_provider_sides",
+    "sidesStatus": "ae2:part/monitor_sides_status",
+    "particle": "expandedae:part/giga_pattern_provider_back",
+    "back": "expandedae:part/giga_pattern_provider_back",
+    "front": "expandedae:block/giga_pattern_provider"
+  }
+}
