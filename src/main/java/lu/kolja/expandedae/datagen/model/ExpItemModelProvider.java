@@ -12,8 +12,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-import static lu.kolja.expandedae.definition.ExpItems.*;
+import static lu.kolja.expandedae.definition.ExpItems.AUTO_COMPLETE_CARD;
+import static lu.kolja.expandedae.definition.ExpItems.EXP2G_PATTERN_PROVIDER_UPGRADE;
+import static lu.kolja.expandedae.definition.ExpItems.EXP_PATTERN_PROVIDER_UPGRADE;
 import static lu.kolja.expandedae.definition.ExpItems.GREATER_ACCEL_CARD;
+import static lu.kolja.expandedae.definition.ExpItems.P2G_PATTERN_PROVIDER_UPGRADE;
+import static lu.kolja.expandedae.definition.ExpItems.PATTERN_REFILLER_CARD;
 
 public class ExpItemModelProvider extends ItemModelProvider {
     public ExpItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -31,7 +35,11 @@ public class ExpItemModelProvider extends ItemModelProvider {
 
         // General
         basicItem(EXP_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(P2G_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(EXP2G_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(MegaCells.M2G_PATTERN_PROVIDER_UPGRADE.asItem());
         basicItem(MegaCells.MEGA_PATTERN_PROVIDER_UPGRADE.asItem());
+        basicItem(ExtendedAE.EXT2G_PATTERN_PROVIDER_UPGRADE.asItem());
         basicItem(ExtendedAE.EXT_PATTERN_PROVIDER_UPGRADE.asItem());
         // CARDS
         basicItem(AUTO_COMPLETE_CARD.asItem());
@@ -40,7 +48,6 @@ public class ExpItemModelProvider extends ItemModelProvider {
         basicItem(ExpItems.DUAL_CELL_HOUSING.asItem());
         basicItem(MegaCells.DUAL_CELL_MEGA_HOUSING.asItem());
         basicItem(ExpItems.PRIORITY_CARD.asItem());
-        basicItem(ExpItems.LINKED_TERMINAL.asItem());
     }
 
     private void storageCell(ItemDefinition<?> item, String background) {

@@ -41,7 +41,7 @@ public class PriorityCardItem extends AEBaseItem {
         if (block instanceof IPriorityHost prioHost) {
             prioHost.setPriority(prio);
             be = block.getBlockState().getBlock().getName();
-        } else if (block instanceof IPartHost partHost && partHost.getPart(ctx.getClickedFace()) instanceof IPriorityHost prioPart) {
+        } else if (block instanceof IPartHost partHost && partHost.getPart(ctx.getHorizontalDirection()) instanceof IPriorityHost prioPart) {
             prioPart.setPriority(prio);
             var partItem = partHost.getPart(ctx.getClickedFace()).getPartItem().asItem();
             be = partItem.getName(new ItemStack(partItem));

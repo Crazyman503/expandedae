@@ -4,7 +4,6 @@ import appeng.api.config.Settings;
 import appeng.api.config.SortDir;
 import appeng.api.config.SortOrder;
 import appeng.client.gui.AEBaseScreen;
-import appeng.client.gui.WidgetContainer;
 import appeng.client.gui.me.crafting.CraftingCPUScreen;
 import appeng.client.gui.me.crafting.CraftingStatusTableRenderer;
 import appeng.client.gui.style.ScreenStyle;

@@ -8,4 +8,6 @@ public class ExpSemantics {
     public static final SlotSemantic PAGE_2 = SlotSemantics.register("EXP_PAGE_2", false);
     public static final SlotSemantic PAGE_3 = SlotSemantics.register("EXP_PAGE_3", false);
     public static final SlotSemantic PAGE_4 = SlotSemantics.register("EXP_PAGE_4", false);
+
+    public static final SlotSemantic[] ALL = new SlotSemantic[] { PAGE_1, PAGE_2, PAGE_3, PAGE_4 };
 }

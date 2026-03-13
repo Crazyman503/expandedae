@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "expandedae:giga_pattern_provider_part"
+    }
+  ],
+  "result": {
+    "item": "expandedae:giga_pattern_provider"
+  }
+}

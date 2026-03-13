@@ -76,6 +76,7 @@ public record HighlightDataPacket(BlockPos pos, ResourceKey<Level> level, long t
                     highlightMenu.eae$highlight(packet.key);
                 }
             });
+            ctx.setPacketHandled(true);
         }
     }
 }

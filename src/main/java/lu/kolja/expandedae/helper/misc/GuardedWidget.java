@@ -1,6 +1,5 @@
 package lu.kolja.expandedae.helper.misc;
 
-import appeng.client.gui.style.ScreenStyle;
 import appeng.client.gui.style.WidgetStyle;
 import net.minecraft.client.gui.components.AbstractWidget;
 import org.jetbrains.annotations.UnknownNullability;

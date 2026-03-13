@@ -13,7 +13,11 @@ import lu.kolja.expandedae.enums.ExpTiers;
 import lu.kolja.expandedae.xmod.extendedae.ExtendedAE;
 import lu.kolja.expandedae.xmod.megacells.MegaCells;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition;
@@ -24,8 +28,19 @@ import java.util.function.Consumer;
 
 import static appeng.core.definitions.AEItems.*;
 import static appeng.core.definitions.AEParts.PATTERN_PROVIDER;
-import static lu.kolja.expandedae.definition.ExpBlocks.*;
-import static lu.kolja.expandedae.definition.ExpItems.*;
+import static lu.kolja.expandedae.definition.ExpBlocks.EXP_CRAFTING_UNIT;
+import static lu.kolja.expandedae.definition.ExpBlocks.EXP_ENERGY_CELL;
+import static lu.kolja.expandedae.definition.ExpBlocks.EXP_IO_PORT;
+import static lu.kolja.expandedae.definition.ExpBlocks.EXP_PATTERN_PROVIDER;
+import static lu.kolja.expandedae.definition.ExpBlocks.GIGA_PATTERN_PROVIDER;
+import static lu.kolja.expandedae.definition.ExpItems.AUTO_COMPLETE_CARD;
+import static lu.kolja.expandedae.definition.ExpItems.DUAL_CELL_HOUSING;
+import static lu.kolja.expandedae.definition.ExpItems.EXP_PATTERN_PROVIDER_PART;
+import static lu.kolja.expandedae.definition.ExpItems.EXP_PATTERN_PROVIDER_UPGRADE;
+import static lu.kolja.expandedae.definition.ExpItems.GIGA_PATTERN_PROVIDER_PART;
+import static lu.kolja.expandedae.definition.ExpItems.GREATER_ACCEL_CARD;
+import static lu.kolja.expandedae.definition.ExpItems.PATTERN_REFILLER_CARD;
+import static lu.kolja.expandedae.definition.ExpItems.PRIORITY_CARD;
 import static lu.kolja.expandedae.enums.Addons.EXT;
 import static lu.kolja.expandedae.enums.Addons.MEGA;
 import static lu.kolja.expandedae.enums.ExpTiers.*;
@@ -56,6 +71,22 @@ public class ExpRecipeProvider extends RecipeProvider {
                 .requires(EXP_PATTERN_PROVIDER)
                 .unlockedBy("has_exp_pattern_provider", has(EXP_PATTERN_PROVIDER))
                 .save(out, craftingId("exp_pattern_provider_part"));
+        ShapedRecipeBuilder.shaped(MISC, GIGA_PATTERN_PROVIDER)
+                .pattern("EPE")
+                .pattern("P P")
+                .pattern("EPE")
+                .define('E', ENGINEERING_PROCESSOR)
+                .define('P', EXP_PATTERN_PROVIDER)
+                .unlockedBy("has_engineering_processor", has(ENGINEERING_PROCESSOR))
+                .save(out, craftingId("giga_pattern_provider"));
+        ShapelessRecipeBuilder.shapeless(MISC, GIGA_PATTERN_PROVIDER)
+                .requires(GIGA_PATTERN_PROVIDER_PART)
+                .unlockedBy("has_giga_pattern_provider_part", has(GIGA_PATTERN_PROVIDER_PART))
+                .save(out, craftingId("giga_pattern_provider_alt"));
+        ShapelessRecipeBuilder.shapeless(MISC, GIGA_PATTERN_PROVIDER_PART)
+                .requires(GIGA_PATTERN_PROVIDER)
+                .unlockedBy("has_giga_pattern_provider", has(GIGA_PATTERN_PROVIDER))
+                .save(out, craftingId("giga_pattern_provider_part"));
 
         ShapedRecipeBuilder.shaped(MISC, EXP_PATTERN_PROVIDER_UPGRADE)
                 .pattern("ECE")
