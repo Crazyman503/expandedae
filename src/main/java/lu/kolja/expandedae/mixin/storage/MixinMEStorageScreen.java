@@ -27,7 +27,8 @@ public abstract class MixinMEStorageScreen<C extends MEStorageMenu> extends AEBa
             at = @At(
                     value = "INVOKE",
                     target = "Lappeng/client/gui/AEBaseScreen;keyPressed(III)Z"
-            )
+            ),
+            remap = true
     )
     public boolean keyPressed(MEStorageScreen<C> instance, int keyCode, int scanCode, int keyPressed, Operation<Boolean> original) {
         var hotKey = ExpandedaeClient.HIGHLIGHT.get();
