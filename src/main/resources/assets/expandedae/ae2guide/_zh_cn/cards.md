@@ -11,8 +11,8 @@ item_ids:
 - expandedae:pattern_refiller_card
 ---
 
-## 截至目前，本模组共添加了两个升级卡：
-- 自动完成卡: 样板供应器升级，它会在当样板供应器推送完物品时自动完成合成任务。*注：与合成样板冲突，请谨慎使用。* 
+## 当前，本模组只添加了以下两种升级卡
+- 自动完成卡：该卡是样板供应器的一项升级，会在样板供应器推送样板内容后自动取消合成任务。_注意：会破坏合成样板的工作，使用时需小心_
 <ItemImage id="auto_complete_card" />
-- 样板补充卡: 能为 <ItemLink id="ae2wtlib:wireless_universal_terminal" /> 自动补充空白样板的升级。
+- 样板补充卡：该卡是<ItemLink id="ae2wtlib:wireless_universal_terminal" />的一项升级，会自动装填拓展编码终端的空白样板槽位，只会在点击编码按钮时尝试装填样板
 <ItemImage id="pattern_refiller_card" />
