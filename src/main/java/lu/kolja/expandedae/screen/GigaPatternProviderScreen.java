@@ -4,6 +4,7 @@ import appeng.client.gui.implementations.PatternProviderScreen;
 import appeng.client.gui.style.ScreenStyle;
 import lu.kolja.expandedae.client.gui.widgets.ExpActionButton;
 import lu.kolja.expandedae.client.gui.widgets.ExpActionItems;
+import lu.kolja.expandedae.definition.ExpLang;
 import lu.kolja.expandedae.menu.GigaPatternProviderMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -33,5 +34,6 @@ public class GigaPatternProviderScreen<C extends GigaPatternProviderMenu> extend
 
         this.nextPageButton.visible = menu.getCurrentPage() < 3;
         this.prevPageButton.visible = menu.getCurrentPage() > 0;
+        this.setTextContent("interface_config", ExpLang.PATTERNS.text(this.getMenu().getCurrentPage() + 1));
     }
 }
