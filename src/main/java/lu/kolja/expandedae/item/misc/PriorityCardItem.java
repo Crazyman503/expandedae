@@ -1,11 +1,12 @@
 package lu.kolja.expandedae.item.misc;
 
-import appeng.api.parts.IPartHost;
+import appeng.blockentity.networking.CableBusBlockEntity;
 import appeng.helpers.IPriorityHost;
 import appeng.items.AEBaseItem;
 import appeng.util.InteractionUtil;
 import lu.kolja.expandedae.definition.ExpLang;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -15,6 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,6 +28,7 @@ import java.util.List;
 public class PriorityCardItem extends AEBaseItem {
     public static final String NBT_PRIO = "priority";
     public static final String NBT_MODE = "mode";
+
     public PriorityCardItem(Properties properties) {
         super(properties);
     }
@@ -32,7 +36,9 @@ public class PriorityCardItem extends AEBaseItem {
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
         if (ctx.getLevel().isClientSide) return InteractionResult.FAIL;
-        var block = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
+
+        BlockPos hitPos = ctx.getClickedPos();
+        var block = ctx.getLevel().getBlockEntity(hitPos);
         var tag = ctx.getItemInHand().getOrCreateTag();
         var prio = tag.getInt(NBT_PRIO);
         var mode = tag.getBoolean(NBT_MODE);
@@ -41,16 +47,21 @@ public class PriorityCardItem extends AEBaseItem {
         if (block instanceof IPriorityHost prioHost) {
             prioHost.setPriority(prio);
             be = block.getBlockState().getBlock().getName();
-        } else if (block instanceof IPartHost partHost && partHost.getPart(ctx.getHorizontalDirection()) instanceof IPriorityHost prioPart) {
-            prioPart.setPriority(prio);
-            var partItem = partHost.getPart(ctx.getClickedFace()).getPartItem().asItem();
-            be = partItem.getName(new ItemStack(partItem));
+        } else if (block instanceof CableBusBlockEntity cable) {
+            Vec3 hitVec = ctx.getClickLocation();
+            Vec3 hitInBlock = new Vec3(hitVec.x - hitPos.getX(), hitVec.y - hitPos.getY(), hitVec.z - hitPos.getZ());
+            var selected = cable.getCableBus().selectPartLocal(hitInBlock);
+            if (selected.part instanceof IPriorityHost prioPart) {
+                prioPart.setPriority(prio);
+                var partItem = selected.part.getPartItem().asItem();
+                be = partItem.getName(new ItemStack(partItem));
+            } else return InteractionResult.FAIL;
         } else return InteractionResult.FAIL;
         ctx.getPlayer().sendSystemMessage(ExpLang.PRIO_CHANGED.text(be, "§b" + prio));
         prio += mode ? 1 : -1;
         tag.putInt(NBT_PRIO, prio);
         ctx.getItemInHand().setTag(tag);
-        return InteractionResult.PASS;
+        return InteractionResult.CONSUME;
     }
 
     @Override
