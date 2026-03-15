@@ -61,7 +61,7 @@ public class PriorityCardItem extends AEBaseItem {
         prio += mode ? 1 : -1;
         tag.putInt(NBT_PRIO, prio);
         ctx.getItemInHand().setTag(tag);
-        return InteractionResult.CONSUME;
+        return InteractionResult.PASS;
     }
 
     @Override
