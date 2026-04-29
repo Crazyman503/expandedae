@@ -1,32 +1,32 @@
 ---
 navigation:
   parent: expandedae-index.md
-  title: 改善生活的小特性
+  title: 改善游戏体验的功能
   icon: expandedae:exp_pattern_provider
   position: 10
 categories:
   - expandedae
 ---
 
-# 本模组为AE2添加了许多改善挂机生活的特性：
-## 样板编码终端：
-### Shift左键已编码的样板将移动至你的物品栏而非AE网络中；
-### 终端内样板乘数：左键乘、右键除，Shift x2，Ctrl x8。
+# 本模组添加了以下所有改善游戏体验的功能
+## 编码终端功能
+### 编码样板时，按住Shift点击可将样板转移至玩家物品栏
+### 终端内集成的倍增按钮
 ![pattern_mult_screen.png](assets/pattern_mult_screen.png)
 
-## 对于样板供应器：我们添加了一个新的按钮来让你更方便地对样板进行乘、除数操作！
-~~ExtendedAE的样板修改器可以扔进岩浆池里或到仙人掌上了~~
+## 样板供应器中的样板倍增：在样板供应器中添加了一个按钮，允许你倍增或倍减所有容纳的样板
+__倍增系数可叠加！__
 
 ![modify_patterns.png](assets/modify_patterns.png)
-## 更多的阻挡模式：
-### 默认：AE2的默认阻挡模式。若样板供应器所指向的容器内无任何样板的输入，则继续推送。 
+## 额外的阻挡模式：为所有样板供应器添加了两种额外的阻挡模式
+### 默认：AE2的默认阻挡模式，如果连接的存储设备中不包含该样板供应器中的任何样板输入，它将推送样板；如果存储设备包含任何非样板输入的内容，阻挡模式将忽略这些内容并继续推送样板。
     
 ![blocking_1.png](assets/blocking/blocking_1.png)
 
-### 任意: 若容器内存有任何物品则不推送；
+### 完全：该阻挡模式下，如果连接的存储设备中包含任何内容，则不会推送样板。
     
 ![blocking_2.png](assets/blocking/blocking_2.png)
 
-### 智能：若容器内仅存在特定样板的推送物，则推送该样板。
+### 智能：允许样板供应器在目标存储设备中仅包含该特定样板的输入时，推送相同的样板。
 
 ![blocking_3.png](assets/blocking/blocking_3.png)

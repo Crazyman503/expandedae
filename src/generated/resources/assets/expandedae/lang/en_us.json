@@ -61,6 +61,7 @@
   "gui.expandedae.filter_terminal": "Filter Terminal",
   "gui.expandedae.giga_pattern_provider": "Giga Pattern Provider",
   "gui.expandedae.highlight": "Shift-Click to highlight",
+  "gui.expandedae.patterns_with_page": "Patterns - %s",
   "gui.expandedae.shift_info": "§7Press §o[SHIFT] §r§7for more info",
   "gui.expandedae.switch_page": "%s Page",
   "gui.expandedae.switch_page.hint": "Click to go to the %s page",

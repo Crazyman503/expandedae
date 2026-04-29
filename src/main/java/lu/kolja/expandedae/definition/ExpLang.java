@@ -69,6 +69,8 @@ public enum ExpLang implements LocalizationEnum {
     SWITCH_PAGE("gui.expandedae.switch_page", "%s Page"),
     SWITCH_PAGE_HINT("gui.expandedae.switch_page.hint", "Click to go to the %s page"),
 
+    PATTERNS("gui.expandedae.patterns_with_page", "Patterns - %s"),
+
     SHIFT_INFO("gui.expandedae.shift_info", "§7Press §o[SHIFT] §r§7for more info"),
 
     HIGHLIGHTED_BLOCK("msg.expandedae.highlighted", "Highlighted block at %s §rin %s"),
