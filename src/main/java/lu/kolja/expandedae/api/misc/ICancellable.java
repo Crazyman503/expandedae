@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.misc;
+package lu.kolja.expandedae.api.misc;
 
 /**
  * Helper interface for cancelling all running crafting jobs.

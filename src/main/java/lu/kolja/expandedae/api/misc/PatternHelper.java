@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.misc;
+package lu.kolja.expandedae.api.misc;
 
 import appeng.api.crafting.PatternDetailsHelper;
 import appeng.api.stacks.GenericStack;

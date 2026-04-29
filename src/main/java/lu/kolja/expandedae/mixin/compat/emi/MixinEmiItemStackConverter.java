@@ -1,9 +1,11 @@
-package lu.kolja.expandedae.mixin.emi;
+package lu.kolja.expandedae.mixin.compat.emi;
 
+import lu.kolja.mixinloadconditions.LoadCondition;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
+@LoadCondition(loadIf = "emi")
 @Mixin(targets = "appeng.integration.modules.emi.EmiItemStackConverter", remap = false)
 public abstract class MixinEmiItemStackConverter {
 

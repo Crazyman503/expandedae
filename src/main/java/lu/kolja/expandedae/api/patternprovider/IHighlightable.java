@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.patternprovider;
+package lu.kolja.expandedae.api.patternprovider;
 
 import net.minecraft.world.level.block.entity.BlockEntity;
 

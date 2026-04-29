@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.patternprovider;
+package lu.kolja.expandedae.api.patternprovider;
 
 public interface IPatternEncodingTerminalMenu {
     void eae$ModifyPattern(Integer value);

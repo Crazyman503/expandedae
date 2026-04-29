@@ -1,10 +1,11 @@
-package lu.kolja.expandedae.mixin.emi;
+package lu.kolja.expandedae.mixin.compat.emi;
 
 import appeng.menu.AEBaseMenu;
 import dev.emi.emi.api.widget.Bounds;
 import dev.emi.emi.mixin.accessor.HandledScreenAccessor;
 import dev.emi.emi.screen.EmiScreenBase;
 import dev.emi.emi.screen.RecipeScreen;
+import lu.kolja.mixinloadconditions.LoadCondition;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
+@LoadCondition(loadIf = "emi")
 @Mixin(value = EmiScreenBase.class, remap = false)
 public abstract class MixinEmiScreenBase {
 

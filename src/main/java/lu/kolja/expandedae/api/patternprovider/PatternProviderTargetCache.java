@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.patternprovider;
+package lu.kolja.expandedae.api.patternprovider;
 
 import appeng.api.behaviors.ExternalStorageStrategy;
 import appeng.api.config.Actionable;

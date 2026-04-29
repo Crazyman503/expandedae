@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.misc;
+package lu.kolja.expandedae.api.misc;
 
 import appeng.client.gui.style.WidgetStyle;
 import net.minecraft.client.gui.components.AbstractWidget;

@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.cpu;
+package lu.kolja.expandedae.api.cpu;
 
 import appeng.api.config.SortDir;
 import appeng.api.config.SortOrder;

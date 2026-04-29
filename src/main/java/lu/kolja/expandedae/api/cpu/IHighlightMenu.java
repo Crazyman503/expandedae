@@ -1,4 +1,4 @@
-package lu.kolja.expandedae.helper.cpu;
+package lu.kolja.expandedae.api.cpu;
 
 import appeng.api.stacks.AEKey;
 
