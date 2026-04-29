@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ExpNetworkHandler {
-    private static final String PROTOCOL_VERSION = ModList.get().getMods().stream().filter(mod -> mod.getModId().equals("expandedae")).findFirst().get().getVersion().getQualifier();
+    private static final String PROTOCOL_VERSION = "1";
     private static int id = 0;
 
     public static final ExpNetworkHandler HANDLER = new ExpNetworkHandler();
