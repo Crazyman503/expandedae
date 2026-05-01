@@ -24,6 +24,7 @@
   "block.expandedae.exp_io_port": "Expanded IO Port",
   "block.expandedae.exp_pattern_provider": "Expanded Pattern Provider",
   "block.expandedae.giga_pattern_provider": "Giga Pattern Provider",
+  "block.expandedae.singularity_crafting_storage": "Singularity Crafting Storage",
   "creativetab.expandedae": "Expanded AE",
   "group.adv_pattern_provider.name": "ME Advanced Pattern Provider",
   "group.ex_interface.name": "ME Extended Interface",
