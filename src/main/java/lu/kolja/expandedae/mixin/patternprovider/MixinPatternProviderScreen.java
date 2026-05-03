@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-@LoadCondition(ignoreIf = "appflux")
+@LoadCondition(ignoreIfAny = {"appflux", "pccard"})
 @Mixin(value = PatternProviderScreen.class, remap = false)
 public abstract class MixinPatternProviderScreen<C extends PatternProviderMenu> extends AEBaseScreen<C> {
 
